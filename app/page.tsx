@@ -17,7 +17,7 @@ export default function Home() {
         </nav>
       </header>
       <main className="flex-grow">
-        {/* <ImageSlider /> */}
+        <ImageSlider />
       </main>
       <footer className="daisy_footer daisy_footer-center p-10 bg-base-200 text-base-content rounded">
         <div className="grid grid-flow-col gap-4">

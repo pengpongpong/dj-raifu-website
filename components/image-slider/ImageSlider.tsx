@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect } from 'react'
+import Image from "next/image";
 import Swiper from 'swiper';
 import { register } from 'swiper/element/bundle';
 import 'swiper/css';
@@ -18,9 +19,6 @@ const ImageSlider = () => {
             loop: true,
             autoplay: {
                 delay: 2000
-            },
-            pagination: {
-                el: '.swiper-pagination',
             },
             navigation: {
                 nextEl: '.swiper-button-next',
@@ -42,24 +40,26 @@ const ImageSlider = () => {
         })
     }, [])
 
+    const imageUrl = [
+        { url: "/diashow1.jpg" },
+        { url: "/diashow2.jpg" },
+        { url: "/diashow3.jpg" },
+    ]
+
+    const images = imageUrl.map(obj => (<Image className="swiper-slide" src={obj.url} width={300} height={300} style={{width: "auto", height: "auto", objectFit: "cover"}} alt="" key={obj.url} />))
+
     return (
-        <div>
-            <div className="swiper">
-
+        <section className="my-8">
+            <div className="swiper w-full">
                 <div className="swiper-wrapper">
-                    <div className="swiper-slide">Slide 1</div>
-                    <div className="swiper-slide">Slide 2</div>
-                    <div className="swiper-slide">Slide 3</div>
-
+                    {images}
                 </div>
-                <div className="swiper-pagination"></div>
 
                 <div className="swiper-button-prev"></div>
                 <div className="swiper-button-next"></div>
 
-                <div className="swiper-scrollbar"></div>
             </div>
-        </div>
+        </section>
     )
 }
 
