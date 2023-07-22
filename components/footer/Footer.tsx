@@ -13,8 +13,8 @@ const Footer = () => {
     return (
         <footer className="daisy_footer daisy_footer-center p-10 bg-black text-white border-t border-white font-text">
             <div className="grid grid-flow-col gap-4">
-                <Link href="" className="daisy_link daisy_link-hover">Über Mich</Link>
-                <Link href="" className="daisy_link daisy_link-hover">Kontakt</Link>
+                <Link href="/ueber-mich" className="daisy_link daisy_link-hover">Über Mich</Link>
+                <Link href="/kontakt" className="daisy_link daisy_link-hover">Kontakt</Link>
                 <Link href="" className="daisy_link daisy_link-hover">Datenschutz</Link>
                 <Link href="" className="daisy_link daisy_link-hover">Impressum</Link>
             </div>
