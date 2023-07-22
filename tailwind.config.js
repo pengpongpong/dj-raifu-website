@@ -11,7 +11,7 @@ module.exports = {
     },
     colors: {
       "white": "white",
-      "black": "black"
+      "black": "black",
     },
     extend: {},
   },

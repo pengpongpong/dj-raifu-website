@@ -3,40 +3,26 @@ import React, { useEffect } from 'react'
 import Image from "next/image";
 import Swiper from 'swiper';
 import { register } from 'swiper/element/bundle';
-import 'swiper/css';
-
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import "swiper/css/bundle";
+import Link from "next/link";
 
 
 const ImageSlider = () => {
     register()
 
     useEffect(() => {
-        const swiper = new Swiper(".swiper", {
-            direction: 'horizontal',
-            loop: true,
+        new Swiper(".swiper", {
+            spaceBetween: 30,
             autoplay: {
                 delay: 2000
             },
+            loop: true,
+            effect: "fade",
+            speed: 1000,
             navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
             },
-            effect: "creative",
-            creativeEffect: {
-                prev: {
-                    shadow: true,
-                    translate: [0, 0, -400],
-                },
-                next: {
-                    translate: [400, 0, 0],
-                    origin: "center",
-                    rotate: [0, 0, 10]
-                },
-            }
-
         })
     }, [])
 
@@ -46,18 +32,23 @@ const ImageSlider = () => {
         { url: "/diashow3.jpg" },
     ]
 
-    const images = imageUrl.map(obj => (<Image className="swiper-slide" src={obj.url} width={300} height={300} style={{width: "auto", height: "auto", objectFit: "cover"}} alt="" key={obj.url} />))
+    const images = imageUrl.map(obj => (
+        <picture className="swiper-slide w-[400px] h-[300px]" key={obj.url} >
+            <Link href="https://instagram.com" rel="noreferrer noopener" target="_blank">
+                <Image src={obj.url} fill sizes="400, 300" style={{ objectFit: "cover" }} alt="" />
+            </Link>
+        </picture>
+    ))
 
     return (
-        <section className="my-8">
-            <div className="swiper w-full">
+        <section className="my-12 w-full">
+            <div className="swiper h-[300px] box-shadow">
                 <div className="swiper-wrapper">
                     {images}
                 </div>
 
-                <div className="swiper-button-prev"></div>
-                <div className="swiper-button-next"></div>
-
+                <div className="swiper-button-prev !text-white opacity-70"></div>
+                <div className="swiper-button-next !text-white opacity-70"></div>
             </div>
         </section>
     )

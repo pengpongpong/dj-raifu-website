@@ -4,11 +4,33 @@
 @tailwind components;
 @tailwind utilities;
 
-.swiper {
-    height: 300px;
+.box-shadow {
+    box-shadow:
+        2px 2px 4px #c5c5c5,
+        -2px -2px 4px #000;
 }
 
-.swiper-slide {
-    width: 300px;
-    background-color: steelblue;
+.soundcloud {
+    font-size: 10px;
+    color: "#f000";
+    line-break: anywhere;
+    word-break: normal;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family:
+        Interstate,
+        Lucida Grande,
+        Lucida Sans Unicode,
+        Lucida Sans,
+        Garuda,
+        Verdana,
+        Tahoma,
+        sans-serif;
+    font-weight: 100;
+
+    &__anchor {
+        color: white;
+        text-decoration: none;
+    }
 }
