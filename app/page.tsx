@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <>
-      <header className="mt-8">
+      <header>
         <Navbar />
         <ImageSlider />
         <h1 className="text-center text-3xl tracking-wide">Willkommen bei DJ Raifu</h1>
