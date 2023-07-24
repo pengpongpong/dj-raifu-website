@@ -5,6 +5,7 @@ import Navbar from "@/components/navbar/Navbar"
 import ImageSlider from "@/components/image-slider/ImageSlider"
 import Instagram from "@/components/instagram/Instagram"
 import Soundcloud from "@/components/soundcloud/Soundcloud"
+import { Socials } from "@/components/footer/Footer"
 
 const Footer = lazy(() => import("@/components/footer/Footer"))
 
@@ -12,7 +13,7 @@ export default function Home() {
 
   return (
     <>
-      <header>
+      <header className="m-4">
         <Navbar />
         <ImageSlider />
         <h1 className="text-center text-3xl tracking-wide">Willkommen bei DJ Raifu</h1>
