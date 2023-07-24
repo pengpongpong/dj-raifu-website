@@ -10,19 +10,19 @@ import twitter from "public/icons/bxl-twitter.svg"
 export const Socials = ({styles}: {styles: string}) => {
     return (
         <nav className={styles}>
-            <Link href="" rel="noreferrer noopener">
+            <Link href="https://soundcloud.com/djraifu" rel="noreferrer noopener">
                 <Image src={soundcloud} alt="" />
             </Link>
-            <Link href="" rel="noreferrer noopener">
+            <Link href="https://www.instagram.com/dj.raifu/" rel="noreferrer noopener">
                 <Image src={instagram} alt="" />
             </Link>
-            <Link href="" rel="noreferrer noopener">
+            <Link href="https://www.tiktok.com/@dj.raifu?_t=8eGTzTctYiZ&_r=1" rel="noreferrer noopener">
                 <Image src={tiktok} alt="" />
             </Link>
-            <Link href="" rel="noreferrer noopener">
+            <Link href="https://www.facebook.com/raifu.absenger" rel="noreferrer noopener">
                 <Image src={facebook} alt="" />
             </Link>
-            <Link href="" rel="noreferrer noopener">
+            <Link href="https://twitter.com/djraifu" rel="noreferrer noopener">
                 <Image src={twitter} alt="" />
             </Link>
         </nav>
