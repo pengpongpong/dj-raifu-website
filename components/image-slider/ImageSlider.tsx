@@ -42,7 +42,7 @@ const ImageSlider = () => {
 
     return (
         <section className="my-12 w-full">
-            <div className="swiper h-[300px] box-shadow">
+            <div className="swiper h-[300px]">
                 <div className="swiper-wrapper">
                     {images}
                 </div>
