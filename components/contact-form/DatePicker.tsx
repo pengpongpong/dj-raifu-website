@@ -83,11 +83,11 @@ export function DatePickerForm({ selected, setSelected }: DatePickerFormProps) {
                                 nav_button_next: "nav-next"
                             }}
                             styles={{
-                                caption: { color: "white" },
+                                caption: { color: "white", backgroundColor: "black" },
                                 head: { color: "white" },
                                 table: { backgroundColor: "black" }
                             }}
-                            className="font-text"
+                            className="font-text border border-white"
                         />
                     </Popover.Content>
                 </Popover.Portal>
