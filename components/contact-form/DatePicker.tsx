@@ -1,5 +1,5 @@
 "use client"
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 import { format } from 'date-fns';
 import { de } from 'date-fns/locale';
@@ -14,11 +14,14 @@ interface DatePickerFormProps {
 }
 
 export function DatePickerForm({ selected, setSelected }: DatePickerFormProps) {
+
+    // set footer if date selected
     let footer;
     if (selected) {
         footer = <p>Du hast den {format(selected, "PP", { locale: de })} ausgewählt.</p>;
     }
 
+    // css styles for date picker
     const css = `
     .selected:not([disabled]) { 
         font-weight: bold; 
@@ -61,7 +64,6 @@ export function DatePickerForm({ selected, setSelected }: DatePickerFormProps) {
                         {selected ? format(selected, 'PPPP', { locale: de }) : "Wähle ein Datum aus"}
                     </button>
                 </Popover.Trigger>
-                <Popover.Anchor />
                 <Popover.Portal>
                     <Popover.Content>
                         <DayPicker
