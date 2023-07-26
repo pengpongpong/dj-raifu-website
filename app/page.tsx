@@ -37,8 +37,6 @@ const Home = async () => {
   const query = groq`*[_type == "home"][0]`
   const data: HomeData = await client.fetch(query)
 
-  console.log(data)
-
   return (
     <>
       <header className="m-4">

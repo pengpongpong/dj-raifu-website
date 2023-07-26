@@ -85,7 +85,7 @@ const ContactForm = () => {
                     render={({ field: { onChange, onBlur, value, ref } }) => (
                         <>
                             <select name="type" className="daisy_select daisy_select-bordered daisy_select-primary w-full" onChange={onChange} defaultValue="Wie möchtest du kontaktiert werden?">
-                                <option disabled selected>Wie möchtest du kontaktiert werden?</option>
+                                <option disabled>Wie möchtest du kontaktiert werden?</option>
                                 <option value="email">Email</option>
                                 <option value="call">Anruf</option>
                             </select>

@@ -7,7 +7,7 @@ const Card = ({ imageUrl, url }: InstagramList) => {
     return (
         <picture className="inline-block p-2 border border-white rounded-lg relative box-shadow">
             <Link href={url} rel="noreferrer noopener" target="_blank">
-                <Image src={imageUrl} alt="" width={400} height={300} />
+                <Image src={imageUrl} alt="" width={2560} height={1440} style={{ width: "auto", height: "100%", objectFit: "cover" }} />
                 <Image className="absolute bottom-2 right-2" src={instagramIcon} alt="" width={40} height={40} />
             </Link>
         </picture>
@@ -24,7 +24,7 @@ const Instagram = ({ list }: { list: InstagramList[] }) => {
     return (
         <section className="mb-8 mt-8 flex flex-col gap-4">
             {list.map(item => (<Card imageUrl={item.imageUrl} url={item.url} key={item.url} />))}
-            <hr className="my-4"/>
+            <hr className="my-4" />
         </section>
     )
 }

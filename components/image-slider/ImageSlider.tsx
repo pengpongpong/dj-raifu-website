@@ -18,11 +18,11 @@ const ImageSlider = ({ imageList }: { imageList: SanityImage[] }) => {
         new Swiper(".swiper", {
             spaceBetween: 30,
             autoplay: {
-                delay: 2000
+                delay: 2500
             },
             loop: true,
             effect: "fade",
-            speed: 1000,
+            speed: 2000,
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
@@ -34,7 +34,7 @@ const ImageSlider = ({ imageList }: { imageList: SanityImage[] }) => {
     const images = imageList.map(obj => (
         <picture className="swiper-slide w-[400px] h-[300px]" key={obj._key} >
             <Link href="https://instagram.com" rel="noreferrer noopener" target="_blank">
-                <Image src={urlForImage(obj).size(2560, 1440).url()} fill sizes="400, 300" style={{ objectFit: "cover" }} alt="" />
+                <Image src={urlForImage(obj).size(2560, 1440).url()} width={2560} height={1440} style={{ width: "auto", height: "100%", objectFit: "cover" }} alt="" />
             </Link>
         </picture>
     ))
