@@ -46,6 +46,16 @@ export default defineType({
             type: "text"
         }),
         defineField({
+            name: "contactText",
+            title: "Kontakt Text",
+            type: "text"
+        }),
+        defineField({
+            name: "contactButton",
+            title: "Kontakt Button Text",
+            type: "string"
+        }),
+        defineField({
             name: "soundcloud",
             title: "Soundcloud",
             type: "array",

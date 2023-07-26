@@ -1,15 +1,19 @@
 "use client"
 import React, { useEffect } from 'react'
+import Link from "next/link";
 import Image from "next/image";
+
 import Swiper from 'swiper';
 import { register } from 'swiper/element/bundle';
 import "swiper/css/bundle";
-import Link from "next/link";
+
+import { SanityImage, urlForImage } from "@/sanity/lib/image";
 
 
-const ImageSlider = () => {
+const ImageSlider = ({ imageList }: { imageList: SanityImage[] }) => {
     register()
 
+    // init swiper
     useEffect(() => {
         new Swiper(".swiper", {
             spaceBetween: 30,
@@ -26,16 +30,11 @@ const ImageSlider = () => {
         })
     }, [])
 
-    const imageUrl = [
-        { url: "/diashow1.jpg" },
-        { url: "/diashow2.jpg" },
-        { url: "/diashow3.jpg" },
-    ]
-
-    const images = imageUrl.map(obj => (
-        <picture className="swiper-slide w-[400px] h-[300px]" key={obj.url} >
+    // create images from imageList and convert sanity url to links
+    const images = imageList.map(obj => (
+        <picture className="swiper-slide w-[400px] h-[300px]" key={obj._key} >
             <Link href="https://instagram.com" rel="noreferrer noopener" target="_blank">
-                <Image src={obj.url} fill sizes="400, 300" style={{ objectFit: "cover" }} alt="" />
+                <Image src={urlForImage(obj).size(2560, 1440).url()} fill sizes="400, 300" style={{ objectFit: "cover" }} alt="" />
             </Link>
         </picture>
     ))
