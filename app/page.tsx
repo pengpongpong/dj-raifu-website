@@ -9,8 +9,6 @@ import { client } from "@/sanity/lib/client"
 import { groq } from "next-sanity"
 import { SanityImage } from "@/sanity/lib/image"
 
-const Footer = lazy(() => import("@/components/footer/Footer"))
-
 interface HomeData {
   _id: string,
   title: string,
@@ -23,15 +21,23 @@ interface HomeData {
     _type: "slug"
   },
   images: SanityImage[],
+  instagram: {
+    url: string,
+    imageUrl: string
+  }[],
   soundcloud: string[],
   _type: "home",
   _rev: string,
   _createdAt: string
 }
 
+const Footer = lazy(() => import("@/components/footer/Footer"))
+
 const Home = async () => {
   const query = groq`*[_type == "home"][0]`
   const data: HomeData = await client.fetch(query)
+
+  console.log(data)
 
   return (
     <>
@@ -47,7 +53,7 @@ const Home = async () => {
           <p>{data?.contactText}</p>
           <Link className="daisy_btn my-4 tracking-wider box-shadow" href="/kontakt">{data?.contactButton}</Link>
         </section>
-        <Instagram list={[{ url: "/diashow1.jpg" }, { url: "/diashow2.jpg" }]} />
+        <Instagram list={data?.instagram} />
         <Soundcloud />
       </main>
       <Footer />

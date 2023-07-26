@@ -19,6 +19,12 @@ const nextConfig = {
                 hostname: "cdn.sanity.io",
                 port: "",
                 pathname: "/images/nwgrhnh6/production/**"
+            },
+            {
+                protocol: "https",
+                hostname: "scontent-vie1-1.cdninstagram.com",
+                port: "",
+                pathname: "/*/*/**"
             }
         ]
     },

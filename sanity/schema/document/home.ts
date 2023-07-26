@@ -56,6 +56,35 @@ export default defineType({
             type: "string"
         }),
         defineField({
+            name: "instagram",
+            title: "Instagram",
+            type: "array",
+            of: [
+                defineField({
+                    name: "link",
+                    title: "Instagram Link",
+                    type: "object",
+                    fields: [
+                        defineField({
+                            name: "url",
+                            title: "Url",
+                            type: "string"
+                        }),
+                        defineField({
+                            name: "imageUrl",
+                            title: "Bild Url",
+                            type: "string"
+                        }),
+                        defineField({
+                            name: "id",
+                            title: "Bild ID",
+                            type: "string"
+                        })
+                    ]
+                })
+            ]
+        }),
+        defineField({
             name: "soundcloud",
             title: "Soundcloud",
             type: "array",
