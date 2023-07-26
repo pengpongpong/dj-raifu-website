@@ -30,7 +30,7 @@ export const Images = ({ list }: { list: InstagramData[] }) => {
 const Album = ({ list }: { list: InstagramData[] }) => {
     return list?.map(obj => {
         return (
-            <picture key={obj.id}>
+            <picture key={obj.id} className="border border-white rounded-lg overflow-hidden">
                 <Link href={`/dashboard/instagram/${obj.id}`}>
                     <Image src={obj.media_url} width={2560} height={1440} alt=""
                         sizes="(max-width:768px) 100vw, (max-width: 1200px) 50vw, 33vw)"
@@ -69,12 +69,13 @@ const InstagramPage = async () => {
 
     return (
         <main className="m-4 font-text">
+            <Link href="/dashboard" className="my-4 daisy_btn daisy_btn-outline w-full box-shadow">Zürück zu Dashboard</Link>
             <h1 className="my-8 text-center text-4xl">Instagram Media</h1>
             <h2 className="text-xl">Bilder:</h2>
             <InstagramImage list={IMAGE} />
 
             <Section>
-                <h2 className="text-xl">Album:</h2>
+                <h2 className="mt-8 text-xl">Album:</h2>
                 <Album list={CAROUSEL_ALBUM} />
             </Section>
 

@@ -6,6 +6,7 @@ import { InstagramData } from "./page"
 
 const InstagramImage = ({ list }: { list: InstagramData[] }) => {
     const [imageUrl, setImageUrl] = useState<Array<string>>([])
+    const [message, setMessage] = useState<string>("")
 
     // handle image selection
     const handleSelect = (event: MouseEvent<HTMLInputElement>) => {
@@ -26,6 +27,8 @@ const InstagramImage = ({ list }: { list: InstagramData[] }) => {
 
     // add data to sanity document
     const submitAdd = () => {
+        if (!imageUrl.length) return setMessage("Kein Bild ausgewählt")
+        
         const token = process.env.NEXT_PUBLIC_SANITY_TOKEN
 
         // filter data from list
@@ -56,7 +59,7 @@ const InstagramImage = ({ list }: { list: InstagramData[] }) => {
                     "patch": {
                         "id": "31de1507-aa0f-4b4b-874e-d1057335fc69",
                         "insert": {
-                            "before": "instagram[0]",
+                            "after": "instagram[-1]",
                             "items": transformData(filteredData)
                         }
                     }
@@ -67,18 +70,26 @@ const InstagramImage = ({ list }: { list: InstagramData[] }) => {
         // submit to sanity api
         fetch("https://nwgrhnh6.api.sanity.io/v2023-07-26/data/mutate/production", { method: "POST", headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" }, body: JSON.stringify(data) })
             .then(res => res.json())
-            .then(result => console.log(result))
+            .then(result => {
+                if (result.results[0].operation === "update") {
+                    setMessage("Successfully added")
+                } else {
+                    const error = result.error.items[0].error.description
+                    setMessage(error)
+                }
+            })
     }
 
     return (
         <>
-            <button onClick={submitAdd} className="my-4 daisy_btn daisy_btn-outline w-full">Add</button>
+            <button onClick={submitAdd} className="my-4 w-full daisy_btn daisy_btn-outline box-shadow">Add</button>
+            {message ? <p className="my-4 font text text-center text-info">{message}</p> : ""}
 
             <section className="flex flex-col gap-4">
                 {list?.map(obj => {
                     if (obj.media_type === "IMAGE") {
                         return (
-                            <picture key={obj.id} className="flex flex-col justify-center items-center">
+                            <picture key={obj.id} className="flex flex-col justify-center items-center border border-white rounded-lg overflow-hidden">
                                 <Image src={obj.media_url} width={2560} height={1440} alt=""
                                     sizes="(max-width:768px) 100vw, (max-width: 1200px) 50vw, 33vw)"
                                 />

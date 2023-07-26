@@ -1,6 +1,7 @@
 import React from 'react'
 import { InstagramData } from "../page"
 import InstagramImage from "../InstagramImage"
+import Link from "next/link"
 
 
 const Album = async ({ params: { id } }: { params: { id: string } }) => {
@@ -14,6 +15,7 @@ const Album = async ({ params: { id } }: { params: { id: string } }) => {
 
     return (
         <main className="m-4 font-text">
+            <Link href="/dashboard/instagram" className="my-4 daisy_btn daisy_btn-outline w-full box-shadow">Zürück zu Instagram Media</Link>
             <h1 className="my-8 text-4xl text-center">Album</h1>
             <InstagramImage list={data} />
         </main>
