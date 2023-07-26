@@ -12,7 +12,7 @@ const Dashboard = async () => {
         return (
             <main className="m-4 flex flex-col justify-center items-center gap-12 flex-grow">
                 <Link href="/dashboard/instagram" className="w-full daisy_btn daisy_btn-outline box-shadow">Instagram Media</Link>
-                <SignOut session={session} />
+                <SignOut />
             </main>)
     }
 

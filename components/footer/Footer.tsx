@@ -38,7 +38,6 @@ const Footer = () => {
                 <Link href="/ueber-mich" className="daisy_link daisy_link-hover">Über Mich</Link>
                 <Link href="/kontakt" className="daisy_link daisy_link-hover">Kontakt</Link>
                 <Link href="/datenschutz" className="daisy_link daisy_link-hover">Datenschutz</Link>
-                <Link href="/impressum" className="daisy_link daisy_link-hover">Impressum</Link>
             </nav>
             <Socials styles="flex gap-8"/>
             <p>Copyright © {year} - DJ Raifu</p>
