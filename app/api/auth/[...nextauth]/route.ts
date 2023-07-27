@@ -1,5 +1,5 @@
-import UserModel from "@/db/UserModel"
-import { connectToDatabase, db } from "@/db/db"
+import UserModel from "@/utils/db/UserModel"
+import { connectToDatabase, db } from "@/utils/db/db"
 import NextAuth from "next-auth/next"
 import CredentialsProvider from "next-auth/providers/credentials"
 

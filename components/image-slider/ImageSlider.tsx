@@ -1,6 +1,5 @@
 "use client"
-import React, { useEffect, useRef } from 'react'
-import Link from "next/link";
+import React, { useEffect } from 'react'
 import Image from "next/image";
 
 import Swiper from 'swiper';
@@ -22,7 +21,7 @@ const ImageSlider = ({ imageList }: { imageList: SanityImage[] }) => {
             loop: true,
             centeredSlides: true,
             effect: "fade",
-            speed: 2000,
+            speed: 1500,
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
@@ -32,11 +31,9 @@ const ImageSlider = ({ imageList }: { imageList: SanityImage[] }) => {
 
     // create images from imageList and convert sanity url to links
     const images = imageList.map(obj => (
-        <div className="swiper-slide w-full h-full !flex !justify-center !items-center" key={obj._key} >
-            <Link href="https://instagram.com" rel="noreferrer noopener" target="_blank">
-                <Image src={urlForImage(obj).size(2560, 1440).url()} width={2560} height={1440} style={{ width: "auto", height: "100%", objectFit: "cover" }} alt="" />
-            </Link>
-        </div>
+        <picture className="swiper-slide w-full h-full !flex !justify-center !items-center" key={obj._key} >
+            <Image src={urlForImage(obj).size(2560, 1440).url()} width={2560} height={1440} style={{ width: "auto", height: "100%", objectFit: "cover" }} alt="" />
+        </picture>
 
     ))
 

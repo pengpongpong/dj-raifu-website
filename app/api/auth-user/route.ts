@@ -1,5 +1,5 @@
-import UserModel from "@/db/UserModel";
-import { connectToDatabase } from "@/db/db";
+import UserModel from "@/utils/db/UserModel";
+import { connectToDatabase } from "@/utils/db/db";
 import { NextRequest, NextResponse } from "next/server";
 
 const bcrypt = require("bcrypt")
