@@ -1,7 +1,8 @@
 "use client"
 import React from 'react'
 import dynamic from 'next/dynamic'
-import { InstagramData } from "./page"
+import { InstagramData } from "@/app/dashboard/instagram/page";
+
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
