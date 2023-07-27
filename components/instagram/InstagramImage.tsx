@@ -1,7 +1,7 @@
 "use client"
 import React, { MouseEvent, useState } from 'react'
 import Image from "next/image"
-import { InstagramData } from "./page"
+import { InstagramData } from "../../app/dashboard/instagram/page"
 
 
 const InstagramImage = ({ list }: { list: InstagramData[] }) => {

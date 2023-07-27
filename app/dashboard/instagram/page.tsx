@@ -1,8 +1,7 @@
 import React, { ReactNode } from 'react'
 import Image from "next/image"
 import Link from "next/link"
-import InstagramVideo from "./InstagramVideo"
-import InstagramImage from "./InstagramImage"
+import InstagramImage from "../../../components/instagram/InstagramImage"
 
 export interface InstagramData {
     media_url: string,
@@ -12,20 +11,6 @@ export interface InstagramData {
 }
 
 type mediaType = "CAROUSEL_ALBUM" | "IMAGE" | "VIDEO"
-
-export const Images = ({ list }: { list: InstagramData[] }) => {
-    return list?.map(obj => {
-        return (
-            <picture key={obj.id}>
-                <Image src={obj.media_url} width={2560} height={1440} alt=""
-                    sizes="(max-width:768px) 100vw, (max-width: 1200px) 50vw, 33vw)"
-                />
-                <p>{obj.id}</p>
-                <input type="checkbox" className="daisy_checkbox" defaultValue={obj.id} />
-            </picture>
-        )
-    })
-}
 
 const Album = ({ list }: { list: InstagramData[] }) => {
     return list?.map(obj => {

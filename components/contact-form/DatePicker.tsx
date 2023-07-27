@@ -60,7 +60,7 @@ export function DatePickerForm({ selected, setSelected }: DatePickerFormProps) {
             <style>{css}</style>
             <Popover.Root>
                 <Popover.Trigger asChild>
-                    <button className="daisy_btn w-full text-white border border-white">
+                    <button className="daisy_btn w-full text-white border border-white hover:text-black hover:bg-white">
                         {selected ? format(selected, 'PPPP', { locale: de }) : "Wähle ein Datum aus"}
                     </button>
                 </Popover.Trigger>

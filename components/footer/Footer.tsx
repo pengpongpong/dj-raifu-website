@@ -33,13 +33,13 @@ const Footer = () => {
     const year = new Date().getFullYear()
 
     return (
-        <footer className="daisy_footer daisy_footer-center p-10 bg-black text-white border-t border-white font-text md:text-base lg:text-lg">
-            <nav className="grid grid-flow-col gap-4 text-sm md:text-base md:gap-6 lg:text-lg lg:gap-12 3xl:text-xl">
+        <footer className="daisy_footer daisy_footer-center p-10 bg-black text-white border-t border-white font-text md:text-base">
+            <Socials styles="flex gap-8 md:gap-12 lg:gap-16"/>
+            <nav className="grid grid-flow-col gap-4 text-sm md:text-base md:gap-6 lg:gap-12">
                 <Link href="/ueber-mich" className="daisy_link daisy_link-hover">Über Mich</Link>
                 <Link href="/kontakt" className="daisy_link daisy_link-hover">Kontakt</Link>
                 <Link href="/datenschutz" className="daisy_link daisy_link-hover">Datenschutz</Link>
             </nav>
-            <Socials styles="flex gap-8 md:gap-12 lg:gap-16"/>
             <p>Copyright © {year} - DJ Raifu</p>
         </footer>
     )

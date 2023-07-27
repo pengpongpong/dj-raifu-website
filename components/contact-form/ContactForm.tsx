@@ -74,7 +74,7 @@ const ContactForm = () => {
     }, [isSubmitSuccessful, reset])
 
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className="md:mx-16 lg:mx-36 xl:max-w-[800px] xl:mx-auto">
             <fieldset className="font-text flex flex-col gap-4">
                 <input type="text" placeholder="Dein Name" className="daisy_input daisy_input-bordered daisy_input-primary w-full border border-white text-white" {...register("name")} />
                 {errors?.name && <ErrorText text={errors?.name?.message} />}
@@ -104,9 +104,9 @@ const ContactForm = () => {
                     selected={selectedDate}
                     setSelected={setSelectedDate}
                 />
-                <textarea className="daisy_textarea daisy_textarea-bordered daisy_textarea-primary text-base" rows={4} placeholder="Hinterlasse mir eine Nachricht" {...register("message")} />
+                <textarea className="daisy_textarea daisy_textarea-bordered daisy_textarea-primary text-base" rows={6} placeholder="Hinterlasse mir eine Nachricht" {...register("message")} />
             </fieldset>
-            <input type="submit" defaultValue="Absenden" className="w-full my-12 daisy_btn bg-black text-white box-shadow" />
+            <input type="submit" defaultValue="Absenden" className="w-full my-12 daisy_btn bg-black text-white box-shadow tracking-wider hover:bg-white hover:text-black transition duration-300 ease-in-out" />
         </form>
     )
 }

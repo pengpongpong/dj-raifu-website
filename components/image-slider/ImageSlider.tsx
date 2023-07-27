@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Link from "next/link";
 import Image from "next/image";
 
@@ -20,26 +20,30 @@ const ImageSlider = ({ imageList }: { imageList: SanityImage[] }) => {
                 delay: 2500
             },
             loop: true,
+            centeredSlides: true,
             effect: "fade",
             speed: 2000,
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
-            },
+            }
         })
     }, [])
 
     // create images from imageList and convert sanity url to links
     const images = imageList.map(obj => (
-        <Link className="swiper-slide w-full h-full mx-auto !flex !justify-center !items-center" key={obj._key} href="https://instagram.com" rel="noreferrer noopener" target="_blank">
-            <Image src={urlForImage(obj).size(2560, 1440).url()} width={2560} height={1440} style={{ width: "auto", height: "100%", objectFit: "cover" }} alt="" />
-        </Link>
+        <div className="swiper-slide w-full h-full !flex !justify-center !items-center" key={obj._key} >
+            <Link href="https://instagram.com" rel="noreferrer noopener" target="_blank">
+                <Image src={urlForImage(obj).size(2560, 1440).url()} width={2560} height={1440} style={{ width: "auto", height: "100%", objectFit: "cover" }} alt="" />
+            </Link>
+        </div>
+
     ))
 
     return (
         <section className="my-12 w-full">
-            <div className="swiper h-[300px] max-w-[450px] md:h-[400px] md:max-w-[700px] lg:h-[500px] lg:max-w-[900px] xl:h-[850px] xl:max-w-[1600px]  flex justify-center items-center">
-                <div className="swiper-wrapper flex-grow flex justify-center items-center">
+            <div className="swiper h-[300px] max-w-[450px] md:h-[400px] md:max-w-[700px] lg:h-[500px] lg:max-w-[900px] xl:h-[850px] xl:max-w-[1600px]">
+                <div className="swiper-wrapper">
                     {images}
                 </div>
 

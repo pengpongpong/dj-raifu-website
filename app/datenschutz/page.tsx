@@ -16,19 +16,19 @@ const PrivacyPolicyPage = async () => {
 
   return (
     <>
-      <header className="mx-4 mt-8 font-text">
+      <header className="mx-4 mt-8 font-text md:mt-12 md:mx-12 lg:mx-24 xl:max-w-[1200px] xl:mx-auto">
         <h1 className="mb-8 text-4xl text-center tracking-wider">{data?.title}</h1>
         <p>{data?.subTitle}</p>
       </header>
-      <main className="m-4 mb-8 font-text">
+      <main className="m-4 mb-8 font-text md:mx-12 lg:mx-24 xl:max-w-[1200px] xl:mx-auto">
         {data?.content?.map(obj => {
           return (
-            <div key={obj.title}>
+            <section key={obj.title}>
               <h2 className="my-4 mt-8 text-lg">{obj.title}</h2>
               {obj.textContent.map(item => {
-                return (<p className="mb-2" key={item}>{item}</p>)
+                return (<p className="mb-2 md:mb-4 ml-2 md:ml-4" key={item}>{item}</p>)
               })}
-            </div>
+            </section>
           )
         })}
       </main>

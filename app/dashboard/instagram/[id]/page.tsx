@@ -1,6 +1,6 @@
 import React from 'react'
 import { InstagramData } from "../page"
-import InstagramImage from "../InstagramImage"
+import InstagramImage from "../../../../components/instagram/InstagramImage"
 import Link from "next/link"
 
 
