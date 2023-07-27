@@ -15,7 +15,11 @@ module.exports = {
       "white": "white",
       "black": "black",
     },
-    extend: {},
+    extend: {
+      screens: {
+        "3xl": "2000px"
+      }
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {
