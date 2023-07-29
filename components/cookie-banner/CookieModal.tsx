@@ -9,6 +9,7 @@ import { deleteCookie, getCookie, setCookie } from "cookies-next";
 
 import cookieIcon from "/public/icons/bx-cookie.svg"
 import { setAnalytic, setConsent, setFunctional, setOpen, setShowBanner, useConsentStore } from "@/utils/store/store";
+import { Modal } from "./CookieBanner";
 
 // styles for dialog modal
 const theme = createTheme({
@@ -78,9 +79,9 @@ const Transition = forwardRef(function Transition(
 });
 
 // cookie icon for MUI buttons
-const CookieIcon = () => (<svg xmlns="http://www.w3.org/2000/svg" className="stroke-white fill-white" width="24" height="24" viewBox="0 0 24 24"><path d="M21.598 11.064a1.006 1.006 0 0 0-.854-.172A2.938 2.938 0 0 1 20 11c-1.654 0-3-1.346-3.003-2.937.005-.034.016-.136.017-.17a.998.998 0 0 0-1.254-1.006A2.963 2.963 0 0 1 15 7c-1.654 0-3-1.346-3-3 0-.217.031-.444.099-.716a1 1 0 0 0-1.067-1.236A9.956 9.956 0 0 0 2 12c0 5.514 4.486 10 10 10s10-4.486 10-10c0-.049-.003-.097-.007-.16a1.004 1.004 0 0 0-.395-.776zM12 20c-4.411 0-8-3.589-8-8a7.962 7.962 0 0 1 6.006-7.75A5.006 5.006 0 0 0 15 9l.101-.001a5.007 5.007 0 0 0 4.837 4C19.444 16.941 16.073 20 12 20z" /><circle cx="12.5" cy="11.5" r="1.5" /><circle cx="8.5" cy="8.5" r="1.5" /><circle cx="7.5" cy="12.5" r="1.5" /><circle cx="15.5" cy="15.5" r="1.5" /><circle cx="10.5" cy="16.5" r="1.5" /></svg>)
+export const CookieIcon = () => (<svg xmlns="http://www.w3.org/2000/svg" className="fill-white" width="24" height="24" viewBox="0 0 24 24"><path d="M21.598 11.064a1.006 1.006 0 0 0-.854-.172A2.938 2.938 0 0 1 20 11c-1.654 0-3-1.346-3.003-2.937.005-.034.016-.136.017-.17a.998.998 0 0 0-1.254-1.006A2.963 2.963 0 0 1 15 7c-1.654 0-3-1.346-3-3 0-.217.031-.444.099-.716a1 1 0 0 0-1.067-1.236A9.956 9.956 0 0 0 2 12c0 5.514 4.486 10 10 10s10-4.486 10-10c0-.049-.003-.097-.007-.16a1.004 1.004 0 0 0-.395-.776zM12 20c-4.411 0-8-3.589-8-8a7.962 7.962 0 0 1 6.006-7.75A5.006 5.006 0 0 0 15 9l.101-.001a5.007 5.007 0 0 0 4.837 4C19.444 16.941 16.073 20 12 20z" /><circle cx="12.5" cy="11.5" r="1.5" /><circle cx="8.5" cy="8.5" r="1.5" /><circle cx="7.5" cy="12.5" r="1.5" /><circle cx="15.5" cy="15.5" r="1.5" /><circle cx="10.5" cy="16.5" r="1.5" /></svg>)
 
-export default function CookieModal() {
+export default function CookieModal({ data }: { data: Modal }) {
     const open = useConsentStore(state => state.open) // open state for dialog modal
     const functionalRef = useRef<HTMLInputElement>(null)
     const analyticsRef = useRef<HTMLInputElement>(null)
@@ -142,45 +143,48 @@ export default function CookieModal() {
                     aria-describedby="cookie-preference-setting"
                 >
                     <button onClick={handleClose} className="absolute top-4 right-4 lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="fill-white" width="35" height="35" viewBox="0 0 24 24"><path d="M9.172 16.242 12 13.414l2.828 2.828 1.414-1.414L13.414 12l2.828-2.828-1.414-1.414L12 10.586 9.172 7.758 7.758 9.172 10.586 12l-2.828 2.828z" /><path d="M12 22c5.514 0 10-4.486 10-10S17.514 2 12 2 2 6.486 2 12s4.486 10 10 10zm0-18c4.411 0 8 3.589 8 8s-3.589 8-8 8-8-3.589-8-8 3.589-8 8-8z" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="fill-white" width="35" height="35" viewBox="0 0 24 24">
+                            <path d="M9.172 16.242 12 13.414l2.828 2.828 1.414-1.414L13.414 12l2.828-2.828-1.414-1.414L12 10.586 9.172 7.758 7.758 9.172 10.586 12l-2.828 2.828z" />
+                            <path d="M12 22c5.514 0 10-4.486 10-10S17.514 2 12 2 2 6.486 2 12s4.486 10 10 10zm0-18c4.411 0 8 3.589 8 8s-3.589 8-8 8-8-3.589-8-8 3.589-8 8-8z" />
+                        </svg>
                     </button>
-                    <h1 className="my-4 text-center text-4xl font-bold tracking-widest" id="cookie-preference-setting">Preference</h1>
+                    <h1 className="my-4 text-center text-4xl font-bold tracking-widest" id="cookie-preference-setting">{data?.title}</h1>
                     <DialogContent>
                         <form>
                             <fieldset>
                                 <label className="cursor-pointer daisy_label mb-2 mt-4 font-bold">
-                                    <span className="daisy_label-text text-white text-xl">Required cookies</span>
+                                    <span className="daisy_label-text text-white text-xl">{data?.requiredHead}</span>
                                     <input type="checkbox" className="daisy_checkbox daisy_checkbox-primary" checked disabled />
                                 </label>
-                                <p className="w-4/5 ml-1">Required cookies help make a website usable by enabling basic functions like page navigation and access to secure areas of the website. The website cannot function properly without these cookies.</p>
+                                <p className="w-4/5 ml-1">{data?.requiredText}</p>
                             </fieldset>
                             <fieldset>
                                 <label className="cursor-pointer daisy_label mb-2 mt-4 font-bold">
-                                    <span className="daisy_label-text text-white text-xl">Functional cookies</span>
+                                    <span className="daisy_label-text text-white text-xl">{data?.functionalHead}</span>
                                     <input type="checkbox" className="daisy_checkbox daisy_checkbox-primary" ref={functionalRef} />
                                 </label>
-                                <p className="w-4/5 ml-1">Preference cookies enable a website to remember information that changes the way the website behaves or looks, like your preferred language.</p>
+                                <p className="w-4/5 ml-1">{data?.functionalText}</p>
                             </fieldset>
                             <fieldset>
                                 <label className="cursor-pointer daisy_label mb-2 mt-4 font-bold">
-                                    <span className="daisy_label-text text-white text-xl">Analytics cookies cookies</span>
+                                    <span className="daisy_label-text text-white text-xl">{data?.analyticsHead}</span>
                                     <input type="checkbox" className="daisy_checkbox daisy_checkbox-primary" ref={analyticsRef} />
                                 </label>
-                                <p className="w-4/5 ml-1">Analytics cookies help website owners to understand how visitors interact with websites by collecting and reporting information anonymously.</p>
+                                <p className="w-4/5 ml-1">{data?.analyticsText}</p>
                             </fieldset>
                         </form>
                     </DialogContent>
                     <div className="p-4 flex flex-col gap-4">
-                        <button className="daisy_btn daisy_btn-outline border-black text-white box-shadow" onClick={handleAcceptAll}>
-                            Akzeptiere
+                        <button className="daisy_btn border-black text-white box-shadow" onClick={handleAcceptAll}>
+                            {data?.acceptButton}
                             <CookieIcon />
                         </button>
-                        <button className="daisy_btn daisy_btn-outline border-black text-white box-shadow" onClick={handleAcceptSettings}>
-                            Speichere Einstellung
+                        <button className="daisy_btn border-black text-white box-shadow" onClick={handleAcceptSettings}>
+                            {data?.userSettingsButton}
                             <CookieIcon />
                         </button>
-                        <button className="daisy_btn daisy_btn-outline border-black text-white box-shadow" >
-                            Ablehnen
+                        <button className="daisy_btn border-black text-white box-shadow" >
+                            {data?.denyButton}
                             <CookieIcon />
                         </button>
                     </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { client } from "@/sanity/lib/client"
 import { groq } from "next-sanity"
+import { ShowCookieModal } from "@/components/cookie-banner/CookieBanner"
 
 interface PrivacyPolicy {
   title: string,
@@ -20,7 +21,7 @@ const PrivacyPolicyPage = async () => {
         <h1 className="mb-8 text-4xl text-center tracking-wider">{data?.title}</h1>
         <p>{data?.subTitle}</p>
       </header>
-      <main className="m-4 mb-8 font-text md:mx-12 lg:mx-24 xl:max-w-[1200px] xl:mx-auto">
+      <main className="m-4 mb-8 flex flex-col font-text md:mx-12 lg:mx-24 xl:max-w-[1200px] xl:mx-auto">
         {data?.content?.map(obj => {
           return (
             <section key={obj.title}>
@@ -31,6 +32,7 @@ const PrivacyPolicyPage = async () => {
             </section>
           )
         })}
+        <ShowCookieModal text="Öffne Cookie Einstellung" styles="my-8 daisy_btn tracking-wide border-black text-white box-shadow"/>
       </main>
     </>
   )
