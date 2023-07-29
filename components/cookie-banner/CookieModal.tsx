@@ -86,17 +86,21 @@ export default function CookieModal({ data }: { data: Modal }) {
     const functionalRef = useRef<HTMLInputElement>(null)
     const analyticsRef = useRef<HTMLInputElement>(null)
 
-    const functionalCookie = getCookie("cookie-functional")
-    const analyticsCookie = getCookie("cookie-analytics")
-
     // get cookies and set input checked
     useEffect(() => {
         const functional = functionalRef?.current
         const analytic = analyticsRef?.current
 
-        if (functionalCookie && functional) functional.checked = !!functionalCookie
-        if (analyticsCookie && analytic) analytic.checked = !!analyticsCookie
-    }, [analyticsCookie, functionalCookie])
+        const functionalCookie = getCookie("cookie-functional")
+        const analyticsCookie = getCookie("cookie-analytics")
+
+        if (functionalCookie && functional) {
+            console.log("called2")
+            functional.checked = !!functionalCookie}
+        if (analyticsCookie && analytic) {
+            console.log("called2")
+            analytic.checked = !!analyticsCookie}
+    }, [open])
 
     // close modal
     const handleClose = () => {
