@@ -2,6 +2,7 @@ import React from 'react'
 import { client } from "@/sanity/lib/client"
 import { groq } from "next-sanity"
 import { ShowCookieModal } from "@/components/cookie-banner/CookieBanner"
+import { Metadata } from "next"
 
 interface PrivacyPolicy {
   title: string,
@@ -11,6 +12,29 @@ interface PrivacyPolicy {
     textContent: string[]
   }[]
 }
+
+export async function generateMetadata(): Promise<Metadata> {
+  const title = "DJ Raifu | Datenschutz"
+  const description = "Information zu Datenschutz"
+  const keywords = "Datenschutz, Cookies"
+  const domain = process.env.NEXT_PUBLIC_DOMAIN
+  return {
+    title: title,
+    description: description,
+    keywords: keywords,
+    authors: [{ name: 'DJ Raifu' }],
+    openGraph: {
+      title: title,
+      description: description,
+      url: `${domain}/datenschutz`,
+      siteName: 'DJ Raifu | Datenschutz',
+      images: [],
+      locale: "de",
+      type: 'website',
+    },
+  }
+}
+
 const PrivacyPolicyPage = async () => {
   const query = groq`*[_type == "privacyPolicy"][0]`
   const data: PrivacyPolicy = await client.fetch(query)
@@ -32,7 +56,7 @@ const PrivacyPolicyPage = async () => {
             </section>
           )
         })}
-        <ShowCookieModal text="Öffne Cookie Einstellung" styles="my-8 daisy_btn tracking-wide border-black text-white box-shadow"/>
+        <ShowCookieModal text="Öffne Cookie Einstellung" styles="my-8 lg:w-1/2 lg:mx-auto daisy_btn tracking-wide border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out"/>
       </main>
     </>
   )

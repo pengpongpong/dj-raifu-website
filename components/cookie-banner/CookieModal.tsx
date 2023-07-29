@@ -79,14 +79,14 @@ const Transition = forwardRef(function Transition(
 });
 
 // cookie icon for MUI buttons
-export const CookieIcon = () => (<svg xmlns="http://www.w3.org/2000/svg" className="fill-white" width="24" height="24" viewBox="0 0 24 24"><path d="M21.598 11.064a1.006 1.006 0 0 0-.854-.172A2.938 2.938 0 0 1 20 11c-1.654 0-3-1.346-3.003-2.937.005-.034.016-.136.017-.17a.998.998 0 0 0-1.254-1.006A2.963 2.963 0 0 1 15 7c-1.654 0-3-1.346-3-3 0-.217.031-.444.099-.716a1 1 0 0 0-1.067-1.236A9.956 9.956 0 0 0 2 12c0 5.514 4.486 10 10 10s10-4.486 10-10c0-.049-.003-.097-.007-.16a1.004 1.004 0 0 0-.395-.776zM12 20c-4.411 0-8-3.589-8-8a7.962 7.962 0 0 1 6.006-7.75A5.006 5.006 0 0 0 15 9l.101-.001a5.007 5.007 0 0 0 4.837 4C19.444 16.941 16.073 20 12 20z" /><circle cx="12.5" cy="11.5" r="1.5" /><circle cx="8.5" cy="8.5" r="1.5" /><circle cx="7.5" cy="12.5" r="1.5" /><circle cx="15.5" cy="15.5" r="1.5" /><circle cx="10.5" cy="16.5" r="1.5" /></svg>)
+export const CookieIcon = () => (<svg xmlns="http://www.w3.org/2000/svg" className="fill-white group-hover:fill-black transition duration-300 ease-in-out" width="24" height="24" viewBox="0 0 24 24"><path d="M21.598 11.064a1.006 1.006 0 0 0-.854-.172A2.938 2.938 0 0 1 20 11c-1.654 0-3-1.346-3.003-2.937.005-.034.016-.136.017-.17a.998.998 0 0 0-1.254-1.006A2.963 2.963 0 0 1 15 7c-1.654 0-3-1.346-3-3 0-.217.031-.444.099-.716a1 1 0 0 0-1.067-1.236A9.956 9.956 0 0 0 2 12c0 5.514 4.486 10 10 10s10-4.486 10-10c0-.049-.003-.097-.007-.16a1.004 1.004 0 0 0-.395-.776zM12 20c-4.411 0-8-3.589-8-8a7.962 7.962 0 0 1 6.006-7.75A5.006 5.006 0 0 0 15 9l.101-.001a5.007 5.007 0 0 0 4.837 4C19.444 16.941 16.073 20 12 20z" /><circle cx="12.5" cy="11.5" r="1.5" /><circle cx="8.5" cy="8.5" r="1.5" /><circle cx="7.5" cy="12.5" r="1.5" /><circle cx="15.5" cy="15.5" r="1.5" /><circle cx="10.5" cy="16.5" r="1.5" /></svg>)
 
 export default function CookieModal({ data }: { data: Modal }) {
     const open = useConsentStore(state => state.open) // open state for dialog modal
     const functionalRef = useRef<HTMLInputElement>(null)
     const analyticsRef = useRef<HTMLInputElement>(null)
 
-    // get cookies and set input checked
+    // get cookies and set input checked when modal open
     useEffect(() => {
         const functional = functionalRef?.current
         const analytic = analyticsRef?.current
@@ -94,12 +94,8 @@ export default function CookieModal({ data }: { data: Modal }) {
         const functionalCookie = getCookie("cookie-functional")
         const analyticsCookie = getCookie("cookie-analytics")
 
-        if (functionalCookie && functional) {
-            console.log("called2")
-            functional.checked = !!functionalCookie}
-        if (analyticsCookie && analytic) {
-            console.log("called2")
-            analytic.checked = !!analyticsCookie}
+        if (functionalCookie && functional) functional.checked = !!functionalCookie
+        if (analyticsCookie && analytic) analytic.checked = !!analyticsCookie
     }, [open])
 
     // close modal
@@ -178,16 +174,16 @@ export default function CookieModal({ data }: { data: Modal }) {
                             </fieldset>
                         </form>
                     </DialogContent>
-                    <div className="p-4 flex flex-col gap-4">
-                        <button className="daisy_btn border-black text-white box-shadow" onClick={handleAcceptAll}>
+                    <div className="p-4 flex flex-col lg:flex-row-reverse gap-4">
+                        <button className="group daisy_btn border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" onClick={handleAcceptAll}>
                             {data?.acceptButton}
                             <CookieIcon />
                         </button>
-                        <button className="daisy_btn border-black text-white box-shadow" onClick={handleAcceptSettings}>
+                        <button className=" group daisy_btn border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" onClick={handleAcceptSettings}>
                             {data?.userSettingsButton}
                             <CookieIcon />
                         </button>
-                        <button className="daisy_btn border-black text-white box-shadow" >
+                        <button className=" group daisy_btn border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" >
                             {data?.denyButton}
                             <CookieIcon />
                         </button>

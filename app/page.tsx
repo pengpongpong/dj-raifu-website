@@ -7,7 +7,8 @@ import Instagram from "@/components/instagram/Instagram"
 import Soundcloud from "@/components/soundcloud/Soundcloud"
 import { client } from "@/sanity/lib/client"
 import { groq } from "next-sanity"
-import { SanityImage } from "@/sanity/lib/image"
+import { SanityImage, urlForImage } from "@/sanity/lib/image"
+import { Metadata } from "next"
 
 interface HomeData {
   _id: string,
@@ -29,6 +30,39 @@ interface HomeData {
   _type: "home",
   _rev: string,
   _createdAt: string
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const title = "DJ Raifu"
+  const description = "Musik DJ für Afro Beats, Hip-Hop, R&B und mehr. Buche ihn für dein Event"
+  const keywords = "DJ Raifu, Afro-Beats, Music, DJ, Hip-Hop, R&B, Events, Veranstaltung"
+  const domain = process.env.NEXT_PUBLIC_DOMAIN
+  
+  const query = groq`*[_type =="logo"][0]{image}`
+  const data = await client.fetch(query)
+
+  return {
+    title: title,
+    description: description,
+    keywords: keywords,
+    authors: [{ name: 'DJ Raifu' }],
+    openGraph: {
+      title: title,
+      description: description,
+      url: `${domain}`,
+      siteName: 'DJ Raifu',
+      images: [
+        {
+          url: urlForImage(data?.image).url(),
+          width: 300,
+          height: 215,
+          alt: "DJ Raifu Logo"
+        }
+      ],
+      locale: "de",
+      type: 'website'
+    },
+  }
 }
 
 const Footer = lazy(() => import("@/components/footer/Footer"))

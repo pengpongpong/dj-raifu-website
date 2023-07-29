@@ -3,12 +3,36 @@ import { SanityImage, urlForImage } from "@/sanity/lib/image"
 import { groq } from "next-sanity"
 import Image from "next/image"
 import React from 'react'
+import { Metadata } from "next"
 
 interface AboutMe {
     title: string,
     subTitle: string,
     image: SanityImage,
     content: string,
+}
+
+// change description
+export async function generateMetadata(): Promise<Metadata> {
+    const title = "DJ Raifu | Über mich"
+    const text = "Musik DJ für Afro Beats, Hip-Hop, R&B und mehr. Buche ihn für dein Event"
+    const keywords = ""
+    const domain = process.env.NEXT_PUBLIC_DOMAIN
+    return {
+        title: title,
+        description: text,
+        keywords: keywords,
+        authors: [{ name: 'DJ Raifu' }],
+        openGraph: {
+            title: title,
+            description: text,
+            url: `${domain}/ueber-mich`,
+            siteName: 'DJ Raifu | Über mich',
+            images: [],
+            locale: "de",
+            type: 'website',
+        },
+    }
 }
 
 const AboutMePage = async () => {
