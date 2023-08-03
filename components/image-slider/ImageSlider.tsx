@@ -47,7 +47,7 @@ const ImageSlider = ({ imageList }: { imageList: ImageSlider[] }) => {
 
     return (
         <section className="my-12 w-full">
-            <div className="swiper h-[300px] max-w-[450px] md:h-[400px] md:max-w-[700px] lg:h-[500px] lg:max-w-[900px] xl:h-[850px] xl:max-w-[1600px]">
+            <div className="swiper h-[300px] max-w-[450px] md:h-[400px] md:max-w-[700px] lg:h-[500px] lg:max-w-[900px] xl:h-[850px] xl:max-w-[1200px]">
                 <div className="swiper-wrapper">
                     {images}
                 </div>
