@@ -24,7 +24,7 @@ const Instagram = ({ list }: { list: InstagramList[] }) => {
     return (
         <>
             <section className="mb-8 mt-8 mx-auto flex flex-col md:flex-row gap-4 md:gap-6 lg:gap-8 lg:max-w-[1300px] justify-center md:flex-wrap">
-                {list.map(item => (<Card imageUrl={item.imageUrl} url={item.url} key={item.url} />))}
+                {list?.map(item => (<Card imageUrl={item.imageUrl} url={item.url} key={item.url} />))}
             </section>
             <hr className="py-4 md:mt-8 md:mx-4 lg:mx-32 lg:mt-12 lg:mb-6 xl:mx-36 3xl:mx-72" />
         </>
