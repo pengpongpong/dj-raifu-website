@@ -3,15 +3,18 @@ import React, { useEffect, useState } from 'react'
 import { Controller, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+import "yup-phone"
 import { DatePickerForm } from "./DatePicker"
 
 const ErrorText = ({ text }: { text?: string }) => {
     return <p className="mb-2 font-text text-error text-center">{text}</p>
 }
 
+// telephone check
+const phoneRegex = /(?:\+?\d{1,3}\s?)?(?:(?:\(\d{1,}\)|\d{1,})[-.\s]?\d{1,}[-.\s]?\d{1,}|(?:\d{1,}[-.\s]?){3,}\d{1,})\s?(?:#|x|ext)\s?\d{1,}|(?:\d{1,}[-.\s]?){3,}\d{1,}/g;
+
 const ContactForm = () => {
-    const [selectedDate, setSelectedDate] = useState<Date>();
-    const [selectOption, setSelectOption] = useState<string>("")
+    const [message, setMessage] = useState<string>("")
 
     // error messages
     const errorMessage = {
@@ -19,6 +22,7 @@ const ContactForm = () => {
         select: "Bitte Kontaktart angeben",
         email: "Bitte gültige Email eintragen",
         call: "Bitte Telefonnummer eintragen",
+        date: "Bitte Event Datum angeben"
     }
 
     // schema validation
@@ -32,10 +36,11 @@ const ContactForm = () => {
         }),
         call: yup.string().when("select", {
             is: "call",
-            then: (call) => call.required(errorMessage.call),
+            then: (call) => call.matches(phoneRegex, "Ungültige Telefonnummer").required(errorMessage.call),
             otherwise: (call) => call.notRequired()
         }),
-        message: yup.string()
+        message: yup.string(),
+        date: yup.date().required(errorMessage.date)
     })
 
     // get react hook form
@@ -53,7 +58,8 @@ const ContactForm = () => {
             select: "",
             email: "",
             call: "",
-            message: ""
+            message: "",
+            date: undefined
         }
     })
 
@@ -62,10 +68,14 @@ const ContactForm = () => {
 
     // submit data
     const onSubmit = handleSubmit((data) => {
-        console.log(data)
-        console.log(selectedDate instanceof Date)
-        console.log(!!selectedDate)
-        console.log(selectOption)
+        const body = {
+            data: data,
+            date: new Intl.DateTimeFormat("de-AT", { dateStyle: "full" }).format(data.date),
+        }
+
+        fetch("/api/contact", { method: "POST", body: JSON.stringify(body) })
+            .then(res => res.json())
+            .then(result => setMessage(result.message))
     })
 
     // reset form on success submit
@@ -82,7 +92,7 @@ const ContactForm = () => {
                 <Controller
                     control={control}
                     name="select"
-                    render={({ field: { onChange, onBlur, value, ref } }) => (
+                    render={({ field: { onChange } }) => (
                         <>
                             <select name="type" className="daisy_select daisy_select-bordered daisy_select-primary w-full" onChange={onChange} defaultValue="Wie möchtest du kontaktiert werden?">
                                 <option disabled>Wie möchtest du kontaktiert werden?</option>
@@ -100,13 +110,24 @@ const ContactForm = () => {
                 {watchSelect === "call" ? <input type="text" placeholder="Deine Telefonnummer" className="daisy_input daisy_input-bordered daisy_input-primary w-full border border-white text-white" {...register("call")} /> : ""}
                 {errors?.call && watchSelect && <ErrorText text={errors?.call?.message} />}
 
-                <DatePickerForm
-                    selected={selectedDate}
-                    setSelected={setSelectedDate}
+                <Controller
+                    control={control}
+                    name="date"
+                    render={({ field: { onChange, value } }) => (
+                        <>
+                            <DatePickerForm
+                                selected={value}
+                                setSelected={(date) => onChange(date)}
+                            />
+                            {errors?.date && <ErrorText text={errors?.date?.message} />}
+                        </>
+                    )}
                 />
+
                 <textarea className="daisy_textarea daisy_textarea-bordered daisy_textarea-primary text-base" rows={6} placeholder="Hinterlasse mir eine Nachricht" {...register("message")} />
             </fieldset>
             <input type="submit" defaultValue="Absenden" className="w-full my-12 daisy_btn bg-black text-white box-shadow tracking-wider hover:bg-white hover:text-black transition duration-300 ease-in-out" />
+            {message !== "" ? <p className="text-center mb-4 tracking-wide font-text">{message}</p> : ""}
         </form>
     )
 }
