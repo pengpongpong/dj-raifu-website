@@ -85,7 +85,7 @@ const InstagramImage = ({ list }: { list: InstagramData[] }) => {
             <button onClick={submitAdd} className="my-4 w-full daisy_btn daisy_btn-outline box-shadow">Add</button>
             {message ? <p className="my-4 font text text-center text-info">{message}</p> : ""}
 
-            <section className="flex flex-col gap-4">
+            <section className="flex flex-col gap-4 xl:flex-row xl:gap-8">
                 {list?.map(obj => {
                     if (obj.media_type === "IMAGE") {
                         return (

@@ -31,8 +31,7 @@ const InstagramPage = async () => {
     const user = process.env.NEXT_PUBLIC_INSTAGRAM_USER
 
     // instagram api
-    const link = `
-    https://graph.instagram.com/v17.0/${user}/media?access_token=${token}&fields=media_url,cap,children,media_type,permalink`
+    const link = `https://graph.instagram.com/v17.0/${user}/media?access_token=${token}&fields=media_url,cap,children,media_type,permalink`
 
     // fetch data from api
     const fetchData = await fetch(link)
@@ -61,7 +60,9 @@ const InstagramPage = async () => {
 
             <Section>
                 <h2 className="mt-8 text-xl">Album:</h2>
-                <Album list={CAROUSEL_ALBUM} />
+                <div className="flex flex-col xl:flex-row xl:gap-8">
+                    <Album list={CAROUSEL_ALBUM} />
+                </div>
             </Section>
 
             {/* <Section>

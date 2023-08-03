@@ -5,7 +5,7 @@ import instagramIcon from "public/icons/bxl-instagram.svg"
 
 const Card = ({ imageUrl, url }: InstagramList) => {
     return (
-        <picture className="max-w-[400px] h-[400px] md:max-w-[300px] inline-block p-2 bg-black border border-white rounded-lg relative box-shadow hover:scale-125 transition-transform duration-300 ease-in-out hover:z-50">
+        <picture className="max-w-[400px] h-[400px] md:max-w-[300px] inline-block p-2 bg-black border border-white rounded-lg relative box-shadow xl:hover:scale-125 transition-transform duration-300 ease-in-out hover:z-50">
             <Link href={url} rel="noreferrer noopener" target="_blank">
                 <Image src={imageUrl} alt="" width={2560} height={1440} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 <Image className="absolute bottom-2 right-2" src={instagramIcon} alt="" width={40} height={40} />
