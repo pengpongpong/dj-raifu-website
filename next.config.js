@@ -2,12 +2,12 @@
 const csp = `
     base-uri 'self';
     child-src 'self';
-    img-src 'self' https://cdn.sanity.io data: https://scontent-vie1-1.cdninstagram.com;
+    img-src 'self' https://cdn.sanity.io data: https://*.cdninstagram.com;
     style-src 'self' fonts.googleapis.com https: 'unsafe-inline' data:;
     style-src-elem 'self' fonts.googleapis.com data: 'unsafe-inline';
     style-src-attr 'self' 'unsafe-inline' data:;
     font-src 'self' fonts.gstatic.com data: https: data:;
-    frame-src 'self' https://cdn.sanity.io https://w.soundcloud.com;
+    frame-src 'self' https://cdn.sanity.io https://w.soundcloud.com https://*.cdninstagram.com;;
     frame-ancestors 'self';
 `
 
