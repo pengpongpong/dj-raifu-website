@@ -1,2 +1,5 @@
 # DJ Raifu website
-Under construction
+
+Website build with NextJS, TailwindCSS, Sanity and written in Typescript.
+
+[live here](https://djraifu.com)
