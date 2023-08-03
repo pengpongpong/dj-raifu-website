@@ -7,9 +7,9 @@ import { SanityImage, urlForImage } from "@/sanity/lib/image"
 const Card = ({ image }: {image: InstagramList}) => {
 
     return (
-        <picture key={image._key} className="max-w-[400px] h-[400px] md:max-w-[300px] inline-block p-2 bg-black border border-white rounded-lg relative box-shadow xl:hover:scale-125 transition-transform duration-300 ease-in-out hover:z-50">
+        <picture key={image._key} className="max-w-[400px] h-fit md:max-w-[550px] inline-block p-2 bg-black border border-white rounded-lg relative box-shadow xl:hover:scale-125 transition-transform duration-300 ease-in-out hover:z-50">
             <Link href={image.url} rel="noreferrer noopener" target="_blank">
-                <Image src={urlForImage(image.image).size(2560, 1440).url()} alt="" width={2560} height={1440} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                <Image src={urlForImage(image.image).size(2560, 1440).url()} alt="" width={2560} height={1440} style={{ width: "100%", height: "auto", objectFit: "contain" }} />
                 <Image className="absolute bottom-2 right-2" src={instagramIcon} alt="" width={40} height={40} />
             </Link>
         </picture>

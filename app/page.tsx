@@ -91,7 +91,7 @@ const Home = async () => {
           <Link className="daisy_btn w-full my-4 md:my-6 lg:my-8 lg:w-1/2 xl:my-12 tracking-wider box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" href="/kontakt">{data?.contactButton}</Link>
         </section>
         <Instagram list={data?.instagram} />
-        <Soundcloud />
+        <Soundcloud list={data?.soundcloud}/>
       </main>
       <Footer />
     </>
