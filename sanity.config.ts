@@ -1,4 +1,3 @@
-import { visionTool } from '@sanity/vision'
 import { defineConfig } from 'sanity'
 import { deskTool } from 'sanity/desk'
 
@@ -12,6 +11,5 @@ export default defineConfig({
   schema,
   plugins: [
     deskTool(),
-    visionTool({ defaultApiVersion: apiVersion }),
   ],
 })
