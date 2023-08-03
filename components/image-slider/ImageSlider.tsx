@@ -7,9 +7,15 @@ import { register } from 'swiper/element/bundle';
 import "swiper/css/bundle";
 
 import { SanityImage, urlForImage } from "@/sanity/lib/image";
+import Link from "next/link";
 
+interface ImageSlider {
+    image: SanityImage,
+    url: string,
+    _key: string
+}
 
-const ImageSlider = ({ imageList }: { imageList: SanityImage[] }) => {
+const ImageSlider = ({ imageList }: { imageList: ImageSlider[] }) => {
     register()
 
     // init swiper
@@ -30,9 +36,11 @@ const ImageSlider = ({ imageList }: { imageList: SanityImage[] }) => {
     }, [])
 
     // create images from imageList and convert sanity url to links
-    const images = imageList.map(obj => (
+    const images = imageList?.map(obj => (
         <picture className="swiper-slide w-full h-full !flex !justify-center !items-center" key={obj._key} >
-            <Image src={urlForImage(obj).size(2560, 1440).url()} width={2560} height={1440} style={{ width: "auto", height: "100%", objectFit: "cover" }} alt="" />
+            <Link rel="noreferrer noopener" href={obj.url}>
+                <Image src={urlForImage(obj.image).size(2560, 1440).url()} width={2560} height={1440} style={{ width: "auto", height: "100%", objectFit: "cover" }} alt="" />
+            </Link>
         </picture>
 
     ))

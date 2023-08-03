@@ -26,18 +26,31 @@ export default defineType({
             }
         }),
         defineField({
-            name: "images",
+            name: "diashow",
             title: "Diashow Bilder",
             type: "array",
             of: [
                 defineField({
-                    name: "image",
-                    title: "Bild",
-                    type: "image",
-                    options: {
-                        hotspot: true
-                    }
-                })
+                    name: "images",
+                    title: "Bilder",
+                    type: "object",
+                    fields: [
+                        defineField({
+                            name: "image",
+                            title: "Bild",
+                            type: "image",
+                            options: {
+                                hotspot: true
+                            }
+                        }),
+                        defineField({
+                            name: "url",
+                            title: "Link",
+                            type: "string",
+                        })
+                    ]
+                }),
+
             ]
         }),
         defineField({
@@ -62,7 +75,7 @@ export default defineType({
             of: [
                 defineField({
                     name: "link",
-                    title: "Instagram Link",
+                    title: "Instagram Bilder",
                     type: "object",
                     fields: [
                         defineField({
@@ -71,14 +84,9 @@ export default defineType({
                             type: "string"
                         }),
                         defineField({
-                            name: "imageUrl",
-                            title: "Bild Url",
-                            type: "string"
-                        }),
-                        defineField({
-                            name: "id",
-                            title: "Bild ID",
-                            type: "string"
+                            name: "image",
+                            title: "Bild",
+                            type: "image"
                         })
                     ]
                 })

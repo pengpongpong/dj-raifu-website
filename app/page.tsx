@@ -21,10 +21,15 @@ interface HomeData {
     current: string,
     _type: "slug"
   },
-  images: SanityImage[],
+  diashow: {
+    image: SanityImage,
+    url: string,
+    _key: string,
+  }[],
   instagram: {
     url: string,
-    imageUrl: string
+    image: SanityImage,
+    _key: string
   }[],
   soundcloud: string[],
   _type: "home",
@@ -75,7 +80,7 @@ const Home = async () => {
     <>
       <header className="m-4 md:m-12 lg:m-18 xl:mx-36 xl:my-16">
         <Navbar />
-        <ImageSlider imageList={data?.images} />
+        <ImageSlider imageList={data?.diashow} />
         <h1 className="text-center text-3xl md:text-4xl lg:text-5xl lg:mt-16 xl:text-6xl tracking-wide">{data?.title}</h1>
         <p className="text-center text-2xl md:text-3xl md:mt-2 lg:text-4xl xl:text-5xl tracking-wide">{data?.subTitle}</p>
       </header>
