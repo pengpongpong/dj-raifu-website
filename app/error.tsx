@@ -1,5 +1,5 @@
 'use client'
-import Navbar from "@/components/navbar/Navbar"
+import Link from "next/link"
 import { useEffect } from 'react'
 import { Footer } from "react-day-picker"
 
@@ -17,7 +17,6 @@ export default function Error({
 
     return (
         <>
-            <Navbar />
             <main className="my-24 flex flex-col gap-8 justify-center items-center font-text">
                 <h1 className="text-6xl">Oops!</h1>
                 <p>Etwas ging schief...</p>
@@ -30,6 +29,7 @@ export default function Error({
                 >
                     Versuche nochmal!
                 </button>
+                <p>Oder gehe zu <Link href="/">Home</Link></p>
             </main>
             <Footer />
         </>
