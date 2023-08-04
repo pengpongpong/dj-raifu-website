@@ -1,3 +1,4 @@
+import { apiVersion } from "@/env";
 import { SlugValidationContext } from "sanity";
 
 export async function isUniqueAcrossAllDocuments(
@@ -5,7 +6,7 @@ export async function isUniqueAcrossAllDocuments(
     context: SlugValidationContext
 ) {
     const { document, getClient } = context;
-    const client = getClient({ apiVersion: "2023-04-24" });
+    const client = getClient({ apiVersion });
     const id = document?._id.replace(/^drafts\./, "");
     const params = {
         draft: `drafts.${id}`,

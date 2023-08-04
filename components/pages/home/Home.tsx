@@ -16,7 +16,6 @@ export interface HomeData {
     contactButton: string,
     slug: {
         current: string,
-        _type: "slug"
     },
     diashow: {
         image: SanityImage,
@@ -24,12 +23,10 @@ export interface HomeData {
         _key: string,
     }[],
     soundcloud: string[],
-    _type: "home",
-    _rev: string,
-    _createdAt: string
 }
 
 const Home = ({ data }: { data: HomeData }) => {
+
     return (
         <>
             <header className="m-4 md:m-12 lg:m-18 xl:mx-36 xl:my-16">

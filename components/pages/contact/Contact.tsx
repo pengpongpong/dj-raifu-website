@@ -1,15 +1,34 @@
 import React from 'react'
 import ContactForm from "@/components/contact-form/ContactForm"
 
-const Contact = () => {
+export interface ContactProps {
+    title: string;
+    name: string;
+    contactForm: string;
+    email: string;
+    telephone: string;
+    datePicker: string;
+    message: string;
+    button: string;
+    error: {
+        name: string;
+        select: string;
+        email: string;
+        telephone: string;
+        date: string
+    }
+}
+
+const Contact = ({ pageData }: { pageData: ContactProps }) => {
+
     return (
         <>
             <header>
-                <h1 className="my-8 font-text text-4xl text-center tracking-wider">Kontakt</h1>
+                <h1 className="my-8 font-text text-4xl text-center tracking-wider">{pageData?.title}</h1>
             </header>
 
             <main className="m-4">
-                <ContactForm />
+                <ContactForm pageData={pageData}/>
             </main>
         </>
     )

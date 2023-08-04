@@ -1,21 +1,24 @@
 import { defineConfig } from 'sanity'
-import { DefaultDocumentNodeResolver, deskTool } from 'sanity/desk'
+import { DefaultDocumentNodeResolver, StructureBuilder, deskTool } from 'sanity/desk'
 
-import { apiVersion, dataset, projectId } from './sanity/env'
+import { projectId, dataset } from "./env"
+
 import { schema } from './sanity/schema'
-import { SanityDocument } from "next-sanity"
-
 import Iframe from 'sanity-plugin-iframe-pane'
+import { groq } from "next-sanity"
 
-// Customize this function to show the correct URL based on the current document
-function getPreviewUrl(doc: SanityDocument) {
-  return doc?.slug?.current
-    ? `${window.location.host}/${doc.slug.current}`
-    : window.location.host
+const domain = process.env.NEXT_PUBLIC_DOMAIN
+
+const previewUrl = {
+  home: `${domain}/api/preview?page=/`,
+  aboutMe: `${domain}/api/preview?page=/ueber-mich`,
+  contact: `${domain}/api/preview?page=/kontakt`,
+  privacyPolicy: `${domain}/api/preview?page=/datenschutz`
 }
 
+// create preview in studio
 const defaultDocumentNode: DefaultDocumentNodeResolver = (S, { schemaType }) => {
-  // Only show preview pane on `movie` schema type documents
+
   switch (schemaType) {
     case "home":
       return S.document().views([
@@ -23,15 +26,83 @@ const defaultDocumentNode: DefaultDocumentNodeResolver = (S, { schemaType }) => 
         S.view
           .component(Iframe)
           .options({
-            url: "http://localhost:3000/api/preview",
+            url: previewUrl.home,
           })
-          .title('Preview'),
+          .title("Vorschau"),
+      ])
+    case "aboutMe":
+      return S.document().views([
+        S.view.form(),
+        S.view
+          .component(Iframe)
+          .options({
+            url: previewUrl.aboutMe,
+          })
+          .title("Vorschau"),
+      ])
+    case "contact":
+      return S.document().views([
+        S.view.form(),
+        S.view
+          .component(Iframe)
+          .options({
+            url: previewUrl.contact,
+          })
+          .title("Vorschau"),
+      ])
+    case "privacyPolicy":
+      return S.document().views([
+        S.view.form(),
+        S.view
+          .component(Iframe)
+          .options({
+            url: previewUrl.privacyPolicy,
+          })
+          .title("Vorschau"),
       ])
     default:
       return S.document().views([S.view.form()])
   }
 }
 
+// structure for pages
+const pageStructure = (S: StructureBuilder) =>
+  S.list()
+    .title("Pages")
+    .items([
+      S.listItem()
+        .title("Home")
+        .schemaType("home")
+        .child(
+          S.documentList()
+            .title("Home Page")
+            .filter(groq`_type == "home"`)
+        ),
+      S.listItem()
+        .title("Über Mich")
+        .schemaType("aboutMe")
+        .child(
+          S.documentList()
+            .title("Über Mich Page")
+            .filter(groq`_type == "aboutMe"`)
+        ),
+      S.listItem()
+        .title("Kontakt")
+        .schemaType("contact")
+        .child(
+          S.documentList()
+            .title("Kontakt Page")
+            .filter(groq`_type == "contact"`)
+        ),
+      S.listItem()
+        .title("Datenschutz")
+        .schemaType("privacyPolicy")
+        .child(
+          S.documentList()
+            .title("Datenschutz Page")
+            .filter(groq`_type == "privacyPolicy"`)
+        ),
+    ])
 
 
 export default defineConfig({
@@ -40,29 +111,35 @@ export default defineConfig({
   dataset,
   schema,
   plugins: [
-    deskTool({ defaultDocumentNode }),
+    deskTool({
+      name: "default",
+      title: "Alles",
+      defaultDocumentNode
+    }),
+    deskTool({
+      name: "pages",
+      title: "Pages",
+      structure: pageStructure,
+      defaultDocumentNode
+    }),
   ],
-  // document: {
-  //   // prev is the result from previous plugins and thus can be composed
-  //   productionUrl: async (prev, context) => {
-  //     // context includes the client and other details
-  //     const {getClient, dataset, document} = context
-  //     const client = getClient({apiVersion: '2023-07-26'})
+  // create preview link to open in new blank
+  document: {
+    productionUrl: async (prev, context) => {
+      const { document } = context
 
-  //     if (document._type === 'aboutMe') {
-  //       const slug = await client.fetch(
-  //         `*[_type == 'routeInfo' && post._ref == $postId][0].slug.current`,
-  //         {postId: document._id}
-  //       )
+      switch (document._type) {
+        case "home":
+          return previewUrl.home
+        case "aboutMe":
+          return previewUrl.aboutMe
+        case "contact":
+          return previewUrl.contact
+        case "privacyPolicy":
+          return previewUrl.privacyPolicy
+      }
 
-  //       const params = new URLSearchParams()
-  //       params.set('preview', 'true')
-  //       params.set('dataset', dataset)
-
-  //       return `https://my-site.com/posts/${slug}?${params}`
-  //     }
-
-  //     return prev
-  //   },
-  // },
+      return prev
+    },
+  },
 })

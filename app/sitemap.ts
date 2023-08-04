@@ -1,4 +1,4 @@
-import { client } from "@/sanity/lib/client"
+import { cachedClient } from "@/sanity/lib/client"
 import { MetadataRoute } from 'next'
 import { groq } from "next-sanity"
 
@@ -9,7 +9,7 @@ interface Data {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const query = groq`*[_type == "home" || _type == "aboutMe" || _type == "privacyPolicy"]{ _updatedAt, _type}`
-    const data: Data[] = await client.fetch(query)
+    const data: Data[] = await cachedClient(query)
     const domain = process.env.NEXT_PUBLIC_DOMAIN
 
     let updateDate = {

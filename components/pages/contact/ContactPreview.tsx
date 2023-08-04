@@ -2,17 +2,15 @@
 import React from 'react'
 
 import { useLiveQuery } from "@sanity/preview-kit"
+import { contactQuery } from "@/sanity/lib/query"
 
-import { aboutMeQuery } from "@/sanity/lib/query"
-import Contact from "./Contact"
+import Contact, { ContactProps } from "./Contact"
 
 
-const ContactPreview = () => {
-    const [data] = useLiveQuery(null, aboutMeQuery)
+const ContactPreview = ({ pageData }: { pageData: ContactProps }) => {
+    const [data] = useLiveQuery(pageData, contactQuery)
 
-    return (
-        <Contact  />
-    )
+    return (<Contact pageData={data} />)
 }
 
 export default ContactPreview

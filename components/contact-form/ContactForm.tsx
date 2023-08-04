@@ -1,10 +1,13 @@
 "use client"
 import React, { useEffect, useState } from 'react'
+
 import { Controller, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import "yup-phone"
+
 import { DatePickerForm } from "./DatePicker"
+
+import { ContactProps } from "../pages/contact/Contact"
 
 const ErrorText = ({ text }: { text?: string }) => {
     return <p className="mb-2 font-text text-error text-center">{text}</p>
@@ -13,16 +16,16 @@ const ErrorText = ({ text }: { text?: string }) => {
 // telephone check
 const phoneRegex = /(?:\+?\d{1,3}\s?)?(?:(?:\(\d{1,}\)|\d{1,})[-.\s]?\d{1,}[-.\s]?\d{1,}|(?:\d{1,}[-.\s]?){3,}\d{1,})\s?(?:#|x|ext)\s?\d{1,}|(?:\d{1,}[-.\s]?){3,}\d{1,}/g;
 
-const ContactForm = () => {
+const ContactForm = ({ pageData }: { pageData: ContactProps }) => {
     const [message, setMessage] = useState<string>("")
 
     // error messages
     const errorMessage = {
-        name: "Bitte Name eintragen",
-        select: "Bitte Kontaktart angeben",
-        email: "Bitte gültige Email eintragen",
-        call: "Bitte Telefonnummer eintragen",
-        date: "Bitte Event Datum angeben"
+        name: pageData?.error.name,
+        select: pageData?.error.select,
+        email: pageData?.error.email,
+        call: pageData?.error.telephone,
+        date: pageData?.error.date
     }
 
     // schema validation
@@ -36,7 +39,7 @@ const ContactForm = () => {
         }),
         call: yup.string().when("select", {
             is: "call",
-            then: (call) => call.matches(phoneRegex, "Ungültige Telefonnummer").required(errorMessage.call),
+            then: (call) => call.matches(phoneRegex, errorMessage.call).required(errorMessage.call),
             otherwise: (call) => call.notRequired()
         }),
         message: yup.string(),
@@ -86,7 +89,7 @@ const ContactForm = () => {
     return (
         <form onSubmit={onSubmit} className="md:mx-16 lg:mx-36 xl:max-w-[800px] xl:mx-auto">
             <fieldset className="font-text flex flex-col gap-4">
-                <input type="text" placeholder="Dein Name" className="daisy_input daisy_input-bordered daisy_input-primary w-full border border-white text-white" {...register("name")} />
+                <input type="text" placeholder={pageData?.name} className="daisy_input daisy_input-bordered daisy_input-primary w-full border border-white text-white" {...register("name")} />
                 {errors?.name && <ErrorText text={errors?.name?.message} />}
 
                 <Controller
@@ -95,7 +98,7 @@ const ContactForm = () => {
                     render={({ field: { onChange } }) => (
                         <>
                             <select name="type" className="daisy_select daisy_select-bordered daisy_select-primary w-full" onChange={onChange} defaultValue="Wie möchtest du kontaktiert werden?">
-                                <option disabled>Wie möchtest du kontaktiert werden?</option>
+                                <option disabled>{pageData?.contactForm}</option>
                                 <option value="email">Email</option>
                                 <option value="call">Anruf</option>
                             </select>
@@ -104,10 +107,10 @@ const ContactForm = () => {
                     )}
                 />
 
-                {watchSelect === "email" ? <input type="text" placeholder="deine@email.com" className="daisy_input daisy_input-bordered daisy_input-primary w-full border border-white text-white" {...register("email")} /> : ""}
+                {watchSelect === "email" ? <input type="text" placeholder={pageData?.email} className="daisy_input daisy_input-bordered daisy_input-primary w-full border border-white text-white" {...register("email")} /> : ""}
                 {errors?.email && <ErrorText text={errors?.email?.message} />}
 
-                {watchSelect === "call" ? <input type="text" placeholder="Deine Telefonnummer" className="daisy_input daisy_input-bordered daisy_input-primary w-full border border-white text-white" {...register("call")} /> : ""}
+                {watchSelect === "call" ? <input type="text" placeholder={pageData?.telephone} className="daisy_input daisy_input-bordered daisy_input-primary w-full border border-white text-white" {...register("call")} /> : ""}
                 {errors?.call && watchSelect && <ErrorText text={errors?.call?.message} />}
 
                 <Controller
@@ -118,15 +121,17 @@ const ContactForm = () => {
                             <DatePickerForm
                                 selected={value}
                                 setSelected={(date) => onChange(date)}
+                                title={pageData?.datePicker}
                             />
                             {errors?.date && <ErrorText text={errors?.date?.message} />}
                         </>
                     )}
                 />
 
-                <textarea className="daisy_textarea daisy_textarea-bordered daisy_textarea-primary text-base" rows={6} placeholder="Hinterlasse mir eine Nachricht" {...register("message")} />
+                <textarea className="daisy_textarea daisy_textarea-bordered daisy_textarea-primary text-base" rows={6} placeholder={pageData?.message} {...register("message")} />
             </fieldset>
-            <input type="submit" defaultValue="Absenden" className="w-full my-12 daisy_btn bg-black text-white box-shadow tracking-wider hover:bg-white hover:text-black transition duration-300 ease-in-out" />
+
+            <button className="w-full my-12 daisy_btn bg-black text-white box-shadow tracking-wider hover:bg-white hover:text-black transition duration-300 ease-in-out" type="submit">{pageData?.button}</button>
             {message !== "" ? <p className="text-center mb-4 tracking-wide font-text">{message}</p> : ""}
         </form>
     )

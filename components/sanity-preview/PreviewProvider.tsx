@@ -3,6 +3,7 @@ import { ReactNode, useMemo } from "react";
 
 import { getClient } from "@/sanity/lib/client";
 import { LiveQueryProvider } from "@sanity/preview-kit";
+import ExitPreview from "./ExitPreview";
 
 // sanity preview document wrapper
 export default function PreviewProvider({
@@ -16,6 +17,7 @@ export default function PreviewProvider({
     return (
         <LiveQueryProvider client={client}>
             {children}
+            <ExitPreview />
         </LiveQueryProvider>
     );
 }

@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction } from "react";
 
 import { format } from 'date-fns';
 import { de } from 'date-fns/locale';
-import { DayPicker, SelectSingleEventHandler } from 'react-day-picker';
+import { DayPicker, SelectSingleEventHandler, useDayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 
 import * as Popover from '@radix-ui/react-popover';
@@ -13,7 +13,7 @@ interface DatePickerFormProps {
     setSelected: Dispatch<SetStateAction<Date | undefined>>
 }
 
-export function DatePickerForm({ selected, setSelected }: DatePickerFormProps) {
+export function DatePickerForm({ selected, setSelected, title }: DatePickerFormProps & { title: string }) {
 
     // set footer if date selected
     let footer;
@@ -61,7 +61,7 @@ export function DatePickerForm({ selected, setSelected }: DatePickerFormProps) {
             <Popover.Root>
                 <Popover.Trigger asChild>
                     <button className="daisy_btn w-full text-white border border-white hover:text-black hover:bg-white">
-                        {selected ? format(selected, 'PPPP', { locale: de }) : "Wähle das Event Datum aus"}
+                        {selected ? format(selected, 'PPPP', { locale: de }) : title}
                     </button>
                 </Popover.Trigger>
                 <Popover.Portal>
