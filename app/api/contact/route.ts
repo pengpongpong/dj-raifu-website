@@ -8,7 +8,10 @@ const nodemailer = require("nodemailer");
 const ses = new aws.SES({
     apiVersion: "2010-12-01",
     region: "eu-central-1",
-    credentials: { awsAccessKey, awsSecretKey }
+    credentials: {
+        accessKeyId: awsAccessKey,
+        secretAccessKey: awsSecretKey
+    }
 });
 
 // create Nodemailer SES transporter

@@ -1,10 +1,12 @@
 import { ReactNode } from "react"
-import './globals.scss'
 import type { Metadata } from 'next'
+import './globals.scss'
+
 import CookieBanner from "@/components/cookie-banner/CookieBanner"
+import CookieModal from "@/components/cookie-banner/CookieModal"
+
 import { cachedClient } from "@/sanity/lib/client"
 import { groq } from "next-sanity"
-import CookieModal from "@/components/cookie-banner/CookieModal"
 
 const domain = process.env.NEXT_PUBLIC_DOMAIN
 
