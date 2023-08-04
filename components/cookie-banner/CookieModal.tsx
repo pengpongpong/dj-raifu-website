@@ -1,13 +1,11 @@
 "use client"
 import React, { ReactElement, Ref, forwardRef, useEffect, useRef } from 'react';
-import Image from "next/image";
 
 import { TransitionProps } from '@mui/material/transitions';
-import { Button, ThemeProvider, createTheme, Slide, DialogContent, DialogActions, Dialog } from "@mui/material";
+import { ThemeProvider, createTheme, Slide, DialogContent, Dialog } from "@mui/material";
 
-import { deleteCookie, getCookie, setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 
-import cookieIcon from "/public/icons/bx-cookie.svg"
 import { setAnalytic, setConsent, setFunctional, setOpen, setShowBanner, useConsentStore } from "@/utils/store/store";
 import { Modal } from "./CookieBanner";
 
@@ -85,18 +83,17 @@ export default function CookieModal({ data }: { data: Modal }) {
     const open = useConsentStore(state => state.open) // open state for dialog modal
     const functionalRef = useRef<HTMLInputElement>(null)
     const analyticsRef = useRef<HTMLInputElement>(null)
+    const functional = functionalRef?.current
+    const analytic = analyticsRef?.current
 
     // get cookies and set input checked when modal open
     useEffect(() => {
-        const functional = functionalRef?.current
-        const analytic = analyticsRef?.current
-
         const functionalCookie = getCookie("cookie-functional")
         const analyticsCookie = getCookie("cookie-analytics")
 
         if (functionalCookie && functional) functional.checked = !!functionalCookie
         if (analyticsCookie && analytic) analytic.checked = !!analyticsCookie
-    }, [open])
+    }, [open, functional, analytic])
 
     // close modal
     const handleClose = () => {
@@ -108,7 +105,7 @@ export default function CookieModal({ data }: { data: Modal }) {
         const functional = functionalRef?.current?.checked
         const analytic = analyticsRef?.current?.checked
 
-        setCookie("cookie-consent", "true")
+        setCookie("cookie-consent", true)
         setCookie("cookie-functional", functional)
         setCookie("cookie-analytics", analytic)
 
@@ -121,13 +118,29 @@ export default function CookieModal({ data }: { data: Modal }) {
 
     // accept all cookies
     const handleAcceptAll = () => {
-        setCookie("cookie-consent", "true")
-        setCookie("cookie-functional", "true")
-        setCookie("cookie-analytics", "true")
+        setCookie("cookie-consent", true)
+        setCookie("cookie-functional", true)
+        setCookie("cookie-analytics", true)
 
         setConsent(true)
         setFunctional(true)
         setAnalytic(true)
+        setOpen(false)
+        setShowBanner(false)
+    }
+
+    // deny all cookies
+    const handleDeny = () => {
+        setCookie("cookie-consent", true)
+        setCookie("cookie-functional", false)
+        setCookie("cookie-analytics", false)
+
+        if (functional?.checked) functional.checked = false
+        if (analytic?.checked) analytic.checked = false
+
+        setConsent(true)
+        setFunctional(false)
+        setAnalytic(false)
         setOpen(false)
         setShowBanner(false)
     }
@@ -183,7 +196,7 @@ export default function CookieModal({ data }: { data: Modal }) {
                             {data?.userSettingsButton}
                             <CookieIcon />
                         </button>
-                        <button className=" group daisy_btn border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" >
+                        <button className=" group daisy_btn border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" onClick={handleDeny}>
                             {data?.denyButton}
                             <CookieIcon />
                         </button>
