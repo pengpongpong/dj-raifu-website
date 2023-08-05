@@ -4,10 +4,11 @@ import React, { ReactElement, Ref, forwardRef, useEffect, useRef } from 'react';
 import { TransitionProps } from '@mui/material/transitions';
 import { ThemeProvider, createTheme, Slide, DialogContent, Dialog } from "@mui/material";
 
-import { getCookie, setCookie } from "cookies-next";
+import { deleteCookie, getCookie, setCookie } from "cookies-next";
 
-import { setAnalytic, setConsent, setFunctional, setOpen, setShowBanner, useConsentStore } from "@/utils/store/store";
+import { setAdvertisement, setAnalytic, setOpen, setShowBanner, useConsentStore } from "@/utils/store/store";
 import { Modal } from "./CookieBanner";
+import { setLocalStorage } from "@/utils/utils";
 
 // styles for dialog modal
 const theme = createTheme({
@@ -79,68 +80,100 @@ const Transition = forwardRef(function Transition(
 // cookie icon for MUI buttons
 export const CookieIcon = () => (<svg xmlns="http://www.w3.org/2000/svg" className="fill-white group-hover:fill-black transition duration-300 ease-in-out" width="24" height="24" viewBox="0 0 24 24"><path d="M21.598 11.064a1.006 1.006 0 0 0-.854-.172A2.938 2.938 0 0 1 20 11c-1.654 0-3-1.346-3.003-2.937.005-.034.016-.136.017-.17a.998.998 0 0 0-1.254-1.006A2.963 2.963 0 0 1 15 7c-1.654 0-3-1.346-3-3 0-.217.031-.444.099-.716a1 1 0 0 0-1.067-1.236A9.956 9.956 0 0 0 2 12c0 5.514 4.486 10 10 10s10-4.486 10-10c0-.049-.003-.097-.007-.16a1.004 1.004 0 0 0-.395-.776zM12 20c-4.411 0-8-3.589-8-8a7.962 7.962 0 0 1 6.006-7.75A5.006 5.006 0 0 0 15 9l.101-.001a5.007 5.007 0 0 0 4.837 4C19.444 16.941 16.073 20 12 20z" /><circle cx="12.5" cy="11.5" r="1.5" /><circle cx="8.5" cy="8.5" r="1.5" /><circle cx="7.5" cy="12.5" r="1.5" /><circle cx="15.5" cy="15.5" r="1.5" /><circle cx="10.5" cy="16.5" r="1.5" /></svg>)
 
+
+// set functional, analytics and advertisement cookies
+export const setCookies = (functionalChecked?: boolean, analyticChecked?: boolean, advertisementChecked?: boolean) => {
+    if (functionalChecked) {
+        setCookie("cookie-functional", "true")
+    } else {
+        deleteCookie("cookie-functional")
+    };
+
+    if (analyticChecked) {
+        setCookie("cookie-analytics", "true")
+    } else {
+        deleteCookie("cookie-analytics")
+    };
+
+    if (advertisementChecked) {
+        setCookie("cookie-advertisement", "true")
+    } else {
+        deleteCookie("cookie-advertisement")
+    };
+}
+
 export default function CookieModal({ data }: { data: Modal }) {
     const open = useConsentStore(state => state.open) // open state for dialog modal
+
     const functionalRef = useRef<HTMLInputElement>(null)
     const analyticsRef = useRef<HTMLInputElement>(null)
+    const advertisementRef = useRef<HTMLInputElement>(null)
+
     const functional = functionalRef?.current
     const analytic = analyticsRef?.current
-
-    // get cookies and set input checked when modal open
-    useEffect(() => {
-        const functionalCookie = getCookie("cookie-functional")
-        const analyticsCookie = getCookie("cookie-analytics")
-
-        if (functionalCookie && functional) functional.checked = !!functionalCookie
-        if (analyticsCookie && analytic) analytic.checked = !!analyticsCookie
-    }, [open, functional, analytic])
+    const advertisement = advertisementRef?.current
 
     // close modal
     const handleClose = () => {
         setOpen(false);
     };
 
+    // get cookies and set input checked when modal open
+    useEffect(() => {
+        const functionalCookie = getCookie("cookie-functional")
+        const analyticsCookie = getCookie("cookie-analytics")
+        const advertisementCookie = getCookie("cookie-advertisement")
+
+        if (!!functionalCookie && functional) functional.checked = !!functionalCookie
+        if (!!analyticsCookie && analytic) analytic.checked = !!analyticsCookie
+        if (!!advertisementCookie && advertisement) advertisement.checked = !!advertisementCookie
+
+    }, [open, functional, analytic, advertisement])
+
+
     // set user cookie settings
     const handleAcceptSettings = () => {
-        const functional = functionalRef?.current?.checked
-        const analytic = analyticsRef?.current?.checked
+        const functionalChecked = functional?.checked
+        const analyticChecked = analytic?.checked
+        const advertisementChecked = advertisement?.checked
 
-        setCookie("cookie-consent", true)
-        setCookie("cookie-functional", functional)
-        setCookie("cookie-analytics", analytic)
+        setLocalStorage("consent", "partial")
 
-        setConsent(true)
-        setFunctional(!!functional)
-        setAnalytic(!!analytic)
+        setCookies(functionalChecked, analyticChecked, advertisementChecked)
+
+        setAdvertisement(`${advertisementChecked}` ?? "false")
+        setAnalytic(`${analyticChecked}` ?? "false")
+
         setOpen(false)
         setShowBanner(false)
     }
 
     // accept all cookies
     const handleAcceptAll = () => {
-        setCookie("cookie-consent", true)
-        setCookie("cookie-functional", true)
-        setCookie("cookie-analytics", true)
+        setLocalStorage("consent", "granted")
 
-        setConsent(true)
-        setFunctional(true)
-        setAnalytic(true)
+        setCookies(true, true, true)
+
+        setAdvertisement("true")
+        setAnalytic("true")
+
         setOpen(false)
         setShowBanner(false)
     }
 
     // deny all cookies
     const handleDeny = () => {
-        setCookie("cookie-consent", true)
-        setCookie("cookie-functional", false)
-        setCookie("cookie-analytics", false)
+        setLocalStorage("consent", "denied")
+
+        setCookies()
+
+        setAdvertisement("false")
+        setAnalytic("false")
 
         if (functional?.checked) functional.checked = false
         if (analytic?.checked) analytic.checked = false
+        if (advertisement?.checked) advertisement.checked = false
 
-        setConsent(true)
-        setFunctional(false)
-        setAnalytic(false)
         setOpen(false)
         setShowBanner(false)
     }
@@ -184,6 +217,13 @@ export default function CookieModal({ data }: { data: Modal }) {
                                     <input type="checkbox" className="daisy_checkbox daisy_checkbox-primary" ref={analyticsRef} />
                                 </label>
                                 <p className="w-4/5 ml-1">{data?.analyticsText}</p>
+                            </fieldset>
+                            <fieldset>
+                                <label className="cursor-pointer daisy_label mb-2 mt-4 font-bold">
+                                    <span className="daisy_label-text text-white text-xl">{data?.advertisementHead}</span>
+                                    <input type="checkbox" className="daisy_checkbox daisy_checkbox-primary" ref={advertisementRef} />
+                                </label>
+                                <p className="w-4/5 ml-1">{data?.advertisementText}</p>
                             </fieldset>
                         </form>
                     </DialogContent>

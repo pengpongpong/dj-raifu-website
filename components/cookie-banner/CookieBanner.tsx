@@ -1,10 +1,11 @@
 "use client"
-import { setAnalytic, setConsent, setFunctional, setOpen, setShowBanner, useConsentStore } from "@/utils/store/store"
+import { setOpen, setShowBanner, useConsentStore } from "@/utils/store/store"
 import React, { useEffect } from 'react'
-import { CookieIcon } from "./CookieModal"
+import { CookieIcon, setCookies } from "./CookieModal"
 import Link from "next/link"
 
-import { getCookie, setCookie } from "cookies-next";
+import { setCookie } from "cookies-next";
+import { getLocalStorage, setLocalStorage } from "@/utils/utils"
 
 interface CookieBannerProps {
     text: string;
@@ -14,6 +15,7 @@ interface CookieBannerProps {
     modal: Modal
 }
 
+// CMS data
 export interface Modal {
     title: string;
     requiredText: string;
@@ -22,13 +24,17 @@ export interface Modal {
     functionalHead: string;
     analyticsText: string;
     analyticsHead: string;
+    advertisementText: string;
+    advertisementHead: string;
     denyButton: string;
     userSettingsButton: string;
     acceptButton: string;
 }
 
+type Consent = "granted" | "partial" | "denied" | null
+
+// open cookie settings modal
 export const ShowCookieModal = ({ text, styles }: { text: string, styles: string }) => {
-    // open cookie settings modal
     const handleModal = () => {
         setOpen(true)
     }
@@ -36,27 +42,28 @@ export const ShowCookieModal = ({ text, styles }: { text: string, styles: string
     return <button className={styles} onClick={handleModal}>{text}</button>
 }
 
+
 const CookieBanner = ({ data }: { data: CookieBannerProps }) => {
-    const consentCookie = getCookie("cookie-consent")
     const showBanner = useConsentStore(state => state.showBanner)
 
     // show cookie banner if no cookie consent 
     useEffect(() => {
-        if (!consentCookie) {
-            setShowBanner(true)
+        const consent = getLocalStorage("consent") as Consent
+        if ((consent === "granted") || (consent === "partial")  || (consent === "denied") ) {
+            return
         }
-    }, [consentCookie])
+
+        return setShowBanner(true)
+    }, [])
 
     // accept all cookies
     const handleAcceptAll = () => {
         setShowBanner(false)
-        setCookie("cookie-consent", "true")
-        setCookie("cookie-functional", "true")
-        setCookie("cookie-analytics", "true")
 
-        setConsent(true)
-        setFunctional(true)
-        setAnalytic(true)
+        setLocalStorage("consent", "granted")
+
+        // set functional, analytics and advertisement cookie 
+        setCookies(true, true, true)
     }
 
     return (
@@ -68,7 +75,7 @@ const CookieBanner = ({ data }: { data: CookieBannerProps }) => {
                 </Link >
                 <span className="flex gap-2"><CookieIcon />{data?.text}</span>
                 <div className="flex gap-4">
-                    <ShowCookieModal text={data?.modalButton} styles="daisy_btn tracking-wide border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out"/>
+                    <ShowCookieModal text={data?.modalButton} styles="daisy_btn tracking-wide border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" />
                     <button className="daisy_btn tracking-wide border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" onClick={handleAcceptAll}>{data?.acceptButton}</button>
                 </div>
             </div > : ""}

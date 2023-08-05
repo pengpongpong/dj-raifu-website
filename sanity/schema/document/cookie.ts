@@ -66,6 +66,16 @@ export default defineType({
                     type: "text"
                 }),
                 defineField({
+                    name: "advertisementHead",
+                    title: "Werbe Cookies Überschrift",
+                    type: "string"
+                }),
+                defineField({
+                    name: "advertisementText",
+                    title: "Werbe Cookies Text",
+                    type: "text"
+                }),
+                defineField({
                     name: "acceptButton",
                     title: "Akzeptiere Button Text",
                     type: "string"

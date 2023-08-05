@@ -8,6 +8,8 @@ import CookieModal from "@/components/cookie-banner/CookieModal"
 import { cachedClient } from "@/sanity/lib/client"
 import { groq } from "next-sanity"
 
+import GoogleAnalytic from "@/components/google-analytics/GoogleAnalytics"
+
 const domain = process.env.NEXT_PUBLIC_DOMAIN
 
 export const metadata: Metadata = {
@@ -40,6 +42,7 @@ export default async function RootLayout({
   return (
     <html lang="de" className="bg-black text-white">
       <body className="flex flex-col min-h-screen">
+        <GoogleAnalytic />
         {children}
         <CookieBanner data={data} />
         <CookieModal data={data?.modal} />

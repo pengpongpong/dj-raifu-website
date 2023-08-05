@@ -1,26 +1,22 @@
 import { create } from "zustand"
 
 interface ConsentStore {
-    consent: boolean;
-    functional: boolean;
-    analytic: boolean;
+    advertisement: string;
+    analytic: string;
     open: boolean;
     showBanner: boolean;
-    setConsent: (consent: boolean) => void,
-    setFunctional: (functional: boolean) => void,
-    setAnalytic: (analytic: boolean) => void,
+    setAdvertisement: (advertisement: string) => void,
+    setAnalytic: (analytic: string) => void,
     setOpen: (open: boolean) => void,
     setShowBanner: (banner: boolean) => void,
 }
 
 export const useConsentStore = create<ConsentStore>((set) => ({
-    consent: false,
-    functional: false,
-    analytic: false,
+    advertisement: "false",
+    analytic: "false",
     open: false,
     showBanner: false,
-    setConsent: ((consent) => set(() => ({ consent: consent }))),
-    setFunctional: ((functional) => set(() => ({ functional: functional }))),
+    setAdvertisement: ((advertisement) => set(() => ({ advertisement: advertisement }))),
     setAnalytic: ((analytic) => set(() => ({ analytic: analytic }))),
     setOpen: ((open) => set(() => ({ open: open }))),
     setShowBanner: ((banner) => set(() => ({ showBanner: banner }))),
@@ -30,15 +26,11 @@ export const setOpen = (open: boolean) => {
     useConsentStore.getState().setOpen(open)
 }
 
-export const setConsent = (consent: boolean) => {
-    useConsentStore.getState().setConsent(consent)
+export const setAdvertisement = (advertisement: string) => {
+    useConsentStore.getState().setAdvertisement(advertisement)
 }
 
-export const setFunctional = (functional: boolean) => {
-    useConsentStore.getState().setFunctional(functional)
-}
-
-export const setAnalytic = (analytic: boolean) => {
+export const setAnalytic = (analytic: string) => {
     useConsentStore.getState().setAnalytic(analytic)
 }
 
