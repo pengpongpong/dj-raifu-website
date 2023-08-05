@@ -8,7 +8,7 @@ import CookieModal from "@/components/cookie-banner/CookieModal"
 import { cachedClient } from "@/sanity/lib/client"
 import { groq } from "next-sanity"
 
-import GoogleAnalytic from "@/components/google-analytics/GoogleAnalytics"
+import Analytics from "@/components/google-analytics/Analytics"
 
 const domain = process.env.NEXT_PUBLIC_DOMAIN
 
@@ -38,11 +38,10 @@ export default async function RootLayout({
 
   const query = groq`*[_type == "cookie"][0]{iconText, text, acceptButton, modalButton, modal}`
   const data = await cachedClient(query)
-
   return (
     <html lang="de" className="bg-black text-white">
       <body className="flex flex-col min-h-screen">
-        <GoogleAnalytic />
+        <Analytics />
         {children}
         <CookieBanner data={data} />
         <CookieModal data={data?.modal} />
