@@ -1,11 +1,8 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import Link from "next/link"
 
-import ImageSlider from "@/components/image-slider/ImageSlider"
-import Instagram from "@/components/instagram/Instagram"
-import Soundcloud from "@/components/soundcloud/Soundcloud"
-
 import { SanityImage } from "@/sanity/lib/image"
+import dynamic from "next/dynamic"
 
 export interface HomeData {
     _id: string,
@@ -24,6 +21,10 @@ export interface HomeData {
     }[],
     soundcloud: string[],
 }
+
+const ImageSlider = dynamic(() => import("@/components/image-slider/ImageSlider"))
+const Instagram = dynamic(() => import("@/components/instagram/Instagram"))
+const Soundcloud = lazy(() => import("@/components/soundcloud/Soundcloud"))
 
 const Home = ({ data }: { data: HomeData }) => {
 

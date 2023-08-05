@@ -22,6 +22,7 @@ export const useConsentStore = create<ConsentStore>((set) => ({
     setShowBanner: ((banner) => set(() => ({ showBanner: banner }))),
 }))
 
+// open cookie-settings modal
 export const setOpen = (open: boolean) => {
     useConsentStore.getState().setOpen(open)
 }
@@ -34,6 +35,7 @@ export const setAnalytic = (analytic: string) => {
     useConsentStore.getState().setAnalytic(analytic)
 }
 
+// show/hide cookie banner
 export const setShowBanner = (banner: boolean) => {
     useConsentStore.getState().setShowBanner(banner)
 }

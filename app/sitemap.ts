@@ -8,7 +8,7 @@ interface Data {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const query = groq`*[_type == "home" || _type == "aboutMe" || _type == "privacyPolicy"]{ _updatedAt, _type}`
+    const query = groq`*[_type == "home" || _type == "aboutMe" || _type == "privacyPolicy" || _type == "contact"]{ _updatedAt, _type}`
     const data: Data[] = await cachedClient(query)
     const domain = process.env.NEXT_PUBLIC_DOMAIN
 
@@ -16,7 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         home: "",
         aboutMe: "",
         contact: "",
-        privacyPolicy: ""
+        privacyPolicy: "",
     }
 
     data?.map((obj) => {
@@ -28,6 +28,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         }
         if (obj._type === "privacyPolicy") {
             updateDate.privacyPolicy = obj._updatedAt
+        }
+        if (obj._type === "contact") {
+            updateDate.contact = obj._updatedAt
         }
     })
 
@@ -43,7 +46,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
         {
             url: `${domain}/kontakt`,
-            lastModified: new Date(2023, 7),
+            lastModified: updateDate.contact,
         },
         {
             url: `${domain}/datenschutz`,

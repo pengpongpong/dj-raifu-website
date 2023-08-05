@@ -65,7 +65,7 @@ const Analytics = () => {
 
 
     // google analytics default consent denied
-    return (<GoogleAnalytics trackPageViews defaultConsent="denied" />)
+    return (<GoogleAnalytics trackPageViews defaultConsent="denied" strategy="lazyOnload"/>)
 }
 
 export default Analytics

@@ -38,7 +38,7 @@ const ImageSlider = ({ imageList }: { imageList: ImageSlider[] }) => {
     // create images from imageList and convert sanity url to links
     const images = imageList?.map(obj => (
         <Link rel="noreferrer noopener" target="_blank" href={obj.url} className="swiper-slide w-full h-full !flex !justify-center !items-center" key={obj._key}>
-            <Image className="block" src={urlForImage(obj.image).url()} width={2560} height={1440} style={{ width: "100%", height: "auto", objectFit: "cover" }} alt="" />
+            <Image className="block" src={urlForImage(obj.image).url()} width={2560} height={1440} priority style={{ width: "100%", height: "auto", objectFit: "cover" }} alt="Image slide" />
         </Link>
 
     ))
