@@ -25,3 +25,7 @@ export const awsSecretKey = assertValue(
   'Missing environment variable: AWS_SECRET_ACCESS_KEY'
 )
 
+export const publicEmail = assertValue(
+  process.env.NEXT_PUBLIC_EMAIL_TO,
+  'Missing environment variable: NEXT_PUBLIC_EMAIL_TO'
+)

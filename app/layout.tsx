@@ -1,15 +1,15 @@
 import { ReactNode, lazy } from "react"
+import Head from "next/head"
 import type { Metadata } from 'next'
 import './globals.scss'
 
 import { cachedClient } from "@/sanity/lib/client"
 import { groq } from "next-sanity"
 
-import Analytics from "@/components/google-analytics/Analytics"
-import Head from "next/head"
 
 const CookieBanner = lazy(() => import("@/components/cookie-banner/CookieBanner"))
 const CookieModal = lazy(() => import("@/components/cookie-banner/CookieModal"))
+const Analytics = lazy(() => import("@/components/google-analytics/Analytics"))
 
 const domain = process.env.NEXT_PUBLIC_DOMAIN
 

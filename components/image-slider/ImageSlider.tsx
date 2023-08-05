@@ -1,9 +1,10 @@
 "use client"
-import React, { useEffect } from 'react'
+import React, { lazy, useEffect } from 'react'
 import Image from "next/image";
 
 import Swiper from 'swiper';
 import { register } from 'swiper/element/bundle';
+
 import "swiper/css/bundle";
 
 import { SanityImage, urlForImage } from "@/sanity/lib/image";
@@ -38,14 +39,14 @@ const ImageSlider = ({ imageList }: { imageList: ImageSlider[] }) => {
     // create images from imageList and convert sanity url to links
     const images = imageList?.map(obj => (
         <Link rel="noreferrer noopener" target="_blank" href={obj.url} className="swiper-slide w-full h-full !flex !justify-center !items-center" key={obj._key}>
-            <Image className="block" src={urlForImage(obj.image).url()} width={2560} height={1440} priority style={{ width: "100%", height: "auto", objectFit: "cover" }} alt="Image slide" />
+            <Image src={urlForImage(obj.image).url()} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 50vw" priority style={{ objectFit: "contain" }} alt="Image slide" />
         </Link>
 
     ))
 
     return (
         <section className="my-12 w-full">
-            <div className="swiper h-[300px] max-w-[450px] md:h-[400px] md:max-w-[700px] lg:h-[500px] lg:max-w-[900px] xl:h-[850px] xl:max-w-[1200px]">
+            <div className="swiper h-[450px] max-w-[450px] md:h-[700px] md:max-w-[700px] lg:h-[900px] lg:max-w-[900px] xl:h-[900px] xl:max-w-[900px]">
                 <div className="swiper-wrapper">
                     {images}
                 </div>

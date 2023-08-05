@@ -1,4 +1,4 @@
-import { awsAccessKey, awsSecretKey } from "@/env";
+import { awsAccessKey, awsSecretKey, publicEmail } from "@/env";
 import { NextRequest, NextResponse } from "next/server";
 
 const aws = require("@aws-sdk/client-ses")
@@ -49,8 +49,8 @@ export const POST = async (req: NextRequest) => {
 
     // mail header
     const mailData = {
-        from: process.env.NEXT_PUBLIC_EMAIL_FROM,
-        to: process.env.NEXT_PUBLIC_EMAIL_FROM,
+        from: "no-reply@djraifu.com",
+        to: publicEmail,
         subject: `Kontaktanfrage | ${data.name}`,
         html: mailHtml,
     }

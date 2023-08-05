@@ -78,7 +78,9 @@ const ContactForm = ({ pageData }: { pageData: ContactProps }) => {
 
         fetch("/api/contact", { method: "POST", body: JSON.stringify(body) })
             .then(res => res.json())
-            .then(result => setMessage(result.message))
+            .then(result => {
+                setMessage(result.message)
+            })
     })
 
     // reset form on success submit
