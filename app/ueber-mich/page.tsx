@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { Metadata } from "next"
 import { draftMode } from "next/headers"
 
@@ -8,8 +8,6 @@ import { aboutMeQuery } from "@/sanity/lib/query"
 
 import AboutMe, { AboutMeProps } from "@/components/pages/about-me/AboutMe"
 
-import PreviewProvider from "@/components/sanity-preview/PreviewProvider"
-import AboutMePreview from "@/components/pages/about-me/AboutMePreview"
 
 // meta tags
 export async function generateMetadata(): Promise<Metadata> {
@@ -43,6 +41,9 @@ export async function generateMetadata(): Promise<Metadata> {
         },
     }
 }
+
+const PreviewProvider = lazy(() => import("@/components/sanity-preview/PreviewProvider"))
+const AboutMePreview = lazy(() => import("@/components/pages/about-me/AboutMePreview"))
 
 const AboutMePage = async () => {
     // preview mode

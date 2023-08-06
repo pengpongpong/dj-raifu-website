@@ -8,7 +8,7 @@ const Card = ({ image }: { image: InstagramList }) => {
 
     return (
         <Link className="w-full h-full inline-block" key={image._key} href={image.url} rel="noreferrer noopener" target="_blank">
-            <Image src={urlForImage(image.image).url()} alt="instagram image" width={350} height={350} style={{ objectFit: "contain", width: "auto", height: "auto" }} />
+            <Image src={urlForImage(image.image).url()} alt="instagram image" width={350} height={350} style={{ objectFit: "contain", width: "100%", height: "100%" }} />
             <Image className="absolute bottom-2 right-2" src={instagramIcon} alt="instagram icon" width={40} height={40} />
         </Link>
     )
@@ -24,10 +24,10 @@ const Instagram = ({ list }: { list: InstagramList[] }) => {
 
     return (
         <>
-            <section className="mb-8 mt-8 mx-auto">
-                <ul className="flex flex-col md:flex-row gap-4 md:gap-6 lg:gap-8 lg:max-w-[1300px] justify-center md:flex-wrap">
+            <section className="mb-8 mt-8 max-w-[1600px] mx-auto flex justify-center items-center">
+                <ul className="flex flex-col md:flex-row gap-6 md:gap-8 lg:max-w-[1300px] justify-center md:flex-wrap">
                     {list?.map(item => (
-                        <li key={item._key} className="w-96 h-96 p-4 overflow-hidden bg-black border border-white rounded-lg relative box-shadow xl:hover:scale-125 transition-transform duration-300 ease-in-out hover:z-20">
+                        <li key={item._key} className="w-auto h-auto md:w-[400px] p-4 overflow-hidden bg-black border border-white rounded-lg relative box-shadow xl:hover:scale-125 transition-transform duration-300 ease-in-out hover:z-20">
                             <Card image={item} />
                         </li>))}
                 </ul>

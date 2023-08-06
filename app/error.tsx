@@ -1,7 +1,8 @@
 'use client'
-import Footer from "@/components/footer/Footer"
-import Link from "next/link"
 import { useEffect } from 'react'
+import Link from "next/link"
+
+import Footer from "@/components/footer/Footer"
 
 
 export default function Error({

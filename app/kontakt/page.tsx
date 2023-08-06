@@ -1,12 +1,10 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { Metadata } from "next"
 import { draftMode } from "next/headers"
 
 import Contact from "@/components/pages/contact/Contact"
 import { getCachedClient } from "@/sanity/lib/client"
 import { contactQuery } from "@/sanity/lib/query"
-import PreviewProvider from "@/components/sanity-preview/PreviewProvider"
-import ContactPreview from "@/components/pages/contact/ContactPreview"
 
 export async function generateMetadata(): Promise<Metadata> {
     const title = "DJ Raifu | Kontakt"
@@ -30,6 +28,9 @@ export async function generateMetadata(): Promise<Metadata> {
         },
     }
 }
+
+const PreviewProvider = lazy(() => import("@/components/sanity-preview/PreviewProvider"))
+const ContactPreview = lazy(() => import("@/components/pages/contact/ContactPreview"))
 
 const ContactPage = async () => {
     // preview mode

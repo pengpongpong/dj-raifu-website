@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { Metadata } from "next"
 import { draftMode } from "next/headers"
 
@@ -6,8 +6,6 @@ import PrivacyPolicy, { PrivacyPolicyProps } from "@/components/pages/privacy-po
 
 import { getCachedClient } from "@/sanity/lib/client"
 import { privacyPolicyQuery } from "@/sanity/lib/query"
-import PreviewProvider from "@/components/sanity-preview/PreviewProvider"
-import PrivacyPolicyPreview from "@/components/pages/privacy-policy/PrivacyPolicyPreview"
 
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -31,6 +29,10 @@ export async function generateMetadata(): Promise<Metadata> {
     },
   }
 }
+
+
+const PreviewProvider = lazy(() => import("@/components/sanity-preview/PreviewProvider"))
+const PrivacyPolicyPreview = lazy(() => import( "@/components/pages/privacy-policy/PrivacyPolicyPreview"))
 
 const PrivacyPolicyPage = async () => {
   // preview mode

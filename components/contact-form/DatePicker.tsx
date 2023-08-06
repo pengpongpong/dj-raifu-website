@@ -1,9 +1,9 @@
 "use client"
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, lazy } from "react";
 
 import { format } from 'date-fns';
 import { de } from 'date-fns/locale';
-import { DayPicker, SelectSingleEventHandler, useDayPicker } from 'react-day-picker';
+import { DayPicker, SelectSingleEventHandler } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 
 import * as Popover from '@radix-ui/react-popover';

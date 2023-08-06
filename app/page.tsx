@@ -10,10 +10,6 @@ import {  homeQuery, navQuery } from "@/sanity/lib/query"
 import Navbar from "@/components/navbar/Navbar"
 import Home from "@/components/pages/home/Home"
 
-import PreviewProvider from "@/components/sanity-preview/PreviewProvider"
-import HomePreview from "@/components/pages/home/HomePreview"
-import NavbarPreview from "@/components/navbar/NavbarPreview"
-
 // meta data
 export async function generateMetadata(): Promise<Metadata> {
   const title = "DJ Raifu"
@@ -48,6 +44,9 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
+const PreviewProvider = lazy(() => import("@/components/sanity-preview/PreviewProvider"))
+const NavbarPreview = lazy(() => import("@/components/navbar/NavbarPreview"))
+const HomePreview = lazy(() => import("@/components/pages/home/HomePreview"))
 const Footer = lazy(() => import("@/components/footer/Footer"))
 
 const HomePage = async () => {
