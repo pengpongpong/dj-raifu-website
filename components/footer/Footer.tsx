@@ -11,12 +11,20 @@ const Footer = () => {
     }
 
     return (
-        <footer className="daisy_footer daisy_footer-center p-10 bg-black text-white border-t border-white font-text md:text-base">
+        <footer className="daisy_footer daisy_footer-center gap-8 p-10 bg-black text-white border-t border-white font-text md:text-base">
             <Socials styles={socialStyles} />
-            <nav className="grid grid-flow-col gap-4 text-sm md:text-base md:gap-6 lg:gap-12">
-                <Link href="/ueber-mich" className="daisy_link daisy_link-hover">Über Mich</Link>
-                <Link href="/kontakt" className="daisy_link daisy_link-hover">Kontakt</Link>
-                <Link href="/datenschutz" className="daisy_link daisy_link-hover">Datenschutz</Link>
+            <nav>
+                <ul className="grid grid-flow-col gap-4 text-sm md:text-base md:gap-6 lg:gap-12">
+                    <li>
+                        <Link href="/ueber-mich" className="daisy_link daisy_link-hover">Über Mich</Link>
+                    </li>
+                    <li>
+                        <Link href="/kontakt" className="daisy_link daisy_link-hover">Kontakt</Link>
+                    </li>
+                    <li>
+                        <Link href="/datenschutz" className="daisy_link daisy_link-hover">Datenschutz</Link>
+                    </li>
+                </ul>
             </nav>
             <p>Copyright © {year} - DJ Raifu</p>
         </footer>

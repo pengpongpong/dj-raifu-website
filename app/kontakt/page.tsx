@@ -37,8 +37,8 @@ const ContactPage = async () => {
         ? { token: process.env.SANITY_API_READ_TOKEN }
         : undefined
 
-
     const pageData = await getCachedClient(preview)(contactQuery)
+
     if (preview && preview.token) {
         return (
             <>

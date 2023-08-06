@@ -2,7 +2,7 @@ import React, { lazy } from 'react'
 import Link from "next/link"
 
 import { SanityImage } from "@/sanity/lib/image"
-import dynamic from "next/dynamic"
+import ImageSlider from "@/components/image-slider/ImageSlider"
 
 export interface HomeData {
     _id: string,
@@ -22,20 +22,19 @@ export interface HomeData {
     soundcloud: string[],
 }
 
-const ImageSlider = dynamic(() => import("@/components/image-slider/ImageSlider"))
-const Instagram = dynamic(() => import("@/components/instagram/Instagram"))
+const Instagram = lazy(() => import("@/components/instagram/Instagram"))
 const Soundcloud = lazy(() => import("@/components/soundcloud/Soundcloud"))
 
 const Home = ({ data }: { data: HomeData }) => {
 
     return (
         <>
-            <header className="m-4 md:m-12 lg:m-18 xl:mx-36 xl:my-16">
+            <header className="m-4 md:m-12 lg:m-18 xl:mx-36 xl:mt-0">
                 <ImageSlider imageList={data?.diashow} />
                 <h1 className="text-center text-3xl md:text-4xl lg:text-5xl lg:mt-16 xl:text-6xl tracking-wide">{data?.title}</h1>
                 <p className="text-center text-2xl md:text-3xl md:mt-2 lg:text-4xl xl:text-5xl tracking-wide">{data?.subTitle}</p>
             </header>
-            <main className="m-4 flex-grow md:mx-12 lg:m-18 xl:mx-80 xl:my-16">
+            <main className="m-4 flex-grow md:mx-12 lg:m-18 xl:mx-80 xl:mb-16">
                 <section className="mb-4 mx-auto font-text text-center gap-4 flex flex-col justify-center items-center text-lg md:text-xl lg:w-4/5 3xl:w-2/3">
                     <p>{data?.content}</p>
                     <p>{data?.contactText}</p>

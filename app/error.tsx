@@ -1,7 +1,8 @@
 'use client'
+import Footer from "@/components/footer/Footer"
 import Link from "next/link"
 import { useEffect } from 'react'
-import { Footer } from "react-day-picker"
+
 
 export default function Error({
     error,
