@@ -13,6 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = "Information zu Datenschutz"
   const keywords = "Datenschutz, Cookies"
   const domain = process.env.NEXT_PUBLIC_DOMAIN
+  
   return {
     title: title,
     description: description,

@@ -10,7 +10,6 @@ interface Data {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const query = groq`*[_type == "home" || _type == "aboutMe" || _type == "privacyPolicy" || _type == "contact"]{ _updatedAt, _type}`
     const data: Data[] = await cachedClient(query)
-    const domain = process.env.NEXT_PUBLIC_DOMAIN
 
     let updateDate = {
         home: "",
@@ -37,19 +36,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return [
         {
-            url: `${domain}`,
+            url: `https://www.djraifu.com`,
             lastModified: updateDate.home,
         },
         {
-            url: `${domain}/ueber-mich`,
+            url: `https://www.djraifu.com/ueber-mich`,
             lastModified: updateDate.aboutMe,
         },
         {
-            url: `${domain}/kontakt`,
+            url: `https://www.djraifu.com/kontakt`,
             lastModified: updateDate.contact,
         },
         {
-            url: `${domain}/datenschutz`,
+            url: `https://www.djraifu.com/datenschutz`,
             lastModified: updateDate.privacyPolicy,
         },
     ]
