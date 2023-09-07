@@ -18,6 +18,16 @@ module.exports = {
     extend: {
       screens: {
         "3xl": "2000px"
+      },
+      keyframes: {
+        showVisibility: {
+          "0%": { visibility: "hidden", opacity: 0 },
+          "100%": { visibility: "visible", opacity: 1 },
+        },
+        slideUp: {
+          "0%": { transform: "translateY(40vh) scale(1.5)" },
+          "100%": { transform: "translateY(0) scale(1)" },
+        }
       }
     },
   },

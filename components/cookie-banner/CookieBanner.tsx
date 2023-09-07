@@ -4,7 +4,6 @@ import React, { useEffect } from 'react'
 import { CookieIcon, setCookies } from "./CookieModal"
 import Link from "next/link"
 
-import { setCookie } from "cookies-next";
 import { getLocalStorage, setLocalStorage } from "@/utils/utils"
 
 interface CookieBannerProps {

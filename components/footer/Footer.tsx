@@ -26,7 +26,7 @@ const Footer = () => {
                     </li>
                 </ul>
             </nav>
-            <p>Copyright © {year} - DJ Raifu</p>
+            <p>Copyright &copy; {year} - DJ Raifu</p>
         </footer>
     )
 }
