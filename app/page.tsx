@@ -5,10 +5,11 @@ import { draftMode } from "next/headers"
 import { cachedClient, getCachedClient } from "@/sanity/lib/client"
 import { groq } from "next-sanity"
 import { urlForImage } from "@/sanity/lib/image"
-import {  homeQuery, navQuery } from "@/sanity/lib/query"
+import { homeQuery, navQuery } from "@/sanity/lib/query"
 
 import Navbar from "@/components/navbar/Navbar"
 import Home from "@/components/pages/home/Home"
+import { usePathname } from "next/navigation"
 
 // meta data
 export async function generateMetadata(): Promise<Metadata> {
@@ -71,7 +72,7 @@ const HomePage = async () => {
 
   return (
     <>
-      <Navbar navData={navData} />
+      <Navbar navData={navData} main />
       <Home data={pageData} />
       <Footer />
     </>

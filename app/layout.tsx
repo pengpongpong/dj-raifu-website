@@ -44,7 +44,7 @@ export default async function RootLayout({
       <body className="flex flex-col min-h-screen">
         <Analytics />
         {children}
-        <CookieBanner data={data} />
+        <CookieBanner data={data} main />
         <CookieModal data={data?.modal} />
       </body>
     </html>
