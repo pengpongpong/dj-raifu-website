@@ -4,27 +4,24 @@ import { draftMode } from "next/headers"
 
 import PrivacyPolicy, { PrivacyPolicyProps } from "@/components/pages/privacy-policy/PrivacyPolicy"
 
-import { getCachedClient } from "@/sanity/lib/client"
+import { cachedClient, getCachedClient } from "@/sanity/lib/client"
 import { privacyPolicyQuery } from "@/sanity/lib/query"
 
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = "DJ Raifu | Datenschutz"
-  const description = "Information zu Datenschutz"
-  const keywords = "Datenschutz, Cookies"
   const domain = process.env.NEXT_PUBLIC_DOMAIN
-  
+  const data: PrivacyPolicyProps = await cachedClient(privacyPolicyQuery)
+
   return {
-    title: title,
-    description: description,
-    keywords: keywords,
+    title: data?.seo.title,
+    description: data?.seo.description,
+    keywords: data?.seo.keywords,
     authors: [{ name: 'DJ Raifu' }],
     openGraph: {
-      title: title,
-      description: description,
+      title: data?.seo.title,
+      description: data?.seo.description,
       url: `${domain}/datenschutz`,
-      siteName: 'DJ Raifu | Datenschutz',
-      images: [],
+      siteName: data?.seo.title,
       locale: "de",
       type: 'website',
     },
@@ -33,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 
 const PreviewProvider = lazy(() => import("@/components/sanity-preview/PreviewProvider"))
-const PrivacyPolicyPreview = lazy(() => import( "@/components/pages/privacy-policy/PrivacyPolicyPreview"))
+const PrivacyPolicyPreview = lazy(() => import("@/components/pages/privacy-policy/PrivacyPolicyPreview"))
 
 const PrivacyPolicyPage = async () => {
   // preview mode

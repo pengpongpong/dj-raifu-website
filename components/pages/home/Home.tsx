@@ -1,8 +1,10 @@
-import React, { lazy } from 'react'
+"use client"
+import React, { lazy, useEffect } from 'react'
 import Link from "next/link"
 
 import { SanityImage } from "@/sanity/lib/image"
 import ImageSlider from "@/components/image-slider/ImageSlider"
+import { Seo } from "@/sanity/lib/query"
 
 export interface HomeData {
     _id: string,
@@ -20,12 +22,27 @@ export interface HomeData {
         _key: string,
     }[],
     soundcloud: string[],
+    seo: Seo
 }
 
 const Instagram = lazy(() => import("@/components/instagram/Instagram"))
 const Soundcloud = lazy(() => import("@/components/soundcloud/Soundcloud"))
 
 const Home = ({ data }: { data: HomeData }) => {
+
+    // show scrollbar after animation
+    useEffect(() => {
+        const body = document.querySelector("body")
+        if (body) {
+            const animate = () => {
+                body.style.overflow = "hidden"
+                setTimeout(() => {
+                    body.style.overflow = "auto"
+                }, 3500)
+            }
+            requestAnimationFrame(animate)
+        }
+    }, [])
 
     return (
         <>

@@ -2,27 +2,24 @@ import React, { lazy } from 'react'
 import { Metadata } from "next"
 import { draftMode } from "next/headers"
 
-import Contact from "@/components/pages/contact/Contact"
-import { getCachedClient } from "@/sanity/lib/client"
+import Contact, { ContactProps } from "@/components/pages/contact/Contact"
+import { cachedClient, getCachedClient } from "@/sanity/lib/client"
 import { contactQuery } from "@/sanity/lib/query"
 
 export async function generateMetadata(): Promise<Metadata> {
-    const title = "DJ Raifu | Kontakt"
-    const description = "Trete in Kontakt mit DJ Raifu über das Kontaktformular"
-    const keywords = "Kontakt, Kontaktformular"
     const domain = process.env.NEXT_PUBLIC_DOMAIN
+    const data: ContactProps = await cachedClient(contactQuery)
 
     return {
-        title: title,
-        description: description,
-        keywords: keywords,
+        title: data?.seo.title,
+        description: data?.seo.description,
+        keywords: data?.seo.keywords,
         authors: [{ name: 'DJ Raifu' }],
         openGraph: {
-            title: title,
-            description: description,
+            title: data?.seo.title,
+            description: data?.seo.description,
             url: `${domain}/kontakt`,
-            siteName: 'DJ Raifu | Kontakt',
-            images: [],
+            siteName: data?.seo.title,
             locale: "de",
             type: 'website',
         },
@@ -38,7 +35,7 @@ const ContactPage = async () => {
         ? { token: process.env.SANITY_API_READ_TOKEN }
         : undefined
 
-    const pageData = await getCachedClient(preview)(contactQuery)
+    const pageData: ContactProps = await getCachedClient(preview)(contactQuery)
 
     if (preview && preview.token) {
         return (

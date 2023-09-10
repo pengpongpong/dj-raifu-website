@@ -1,5 +1,6 @@
 import React from 'react'
 import ContactForm from "@/components/contact-form/ContactForm"
+import { Seo } from "@/sanity/lib/query";
 
 export interface ContactProps {
     title: string;
@@ -16,7 +17,8 @@ export interface ContactProps {
         email: string;
         telephone: string;
         date: string
-    }
+    },
+    seo: Seo
 }
 
 const Contact = ({ pageData }: { pageData: ContactProps }) => {

@@ -1,5 +1,5 @@
 "use client"
-import React, { ReactElement, Ref, forwardRef, useEffect, useRef } from 'react';
+import React, { ReactElement, Ref, forwardRef, useCallback, useEffect, useRef } from 'react';
 
 import { TransitionProps } from '@mui/material/transitions';
 import { ThemeProvider, createTheme, Slide, DialogContent, Dialog } from "@mui/material";
@@ -132,7 +132,7 @@ export default function CookieModal({ data }: { data: Modal }) {
 
 
     // set user cookie settings
-    const handleAcceptSettings = () => {
+    const handleAcceptSettings = useCallback(() => {
         const functionalChecked = functional?.checked
         const analyticChecked = analytic?.checked
         const advertisementChecked = advertisement?.checked
@@ -146,10 +146,10 @@ export default function CookieModal({ data }: { data: Modal }) {
 
         setOpen(false)
         setShowBanner(false)
-    }
+    }, [functional, analytic, advertisement])
 
     // accept all cookies
-    const handleAcceptAll = () => {
+    const handleAcceptAll = useCallback(() => {
         setLocalStorage("consent", "granted")
 
         setCookies(true, true, true)
@@ -159,10 +159,10 @@ export default function CookieModal({ data }: { data: Modal }) {
 
         setOpen(false)
         setShowBanner(false)
-    }
+    }, [])
 
     // deny all cookies
-    const handleDeny = () => {
+    const handleDeny = useCallback(() => {
         setLocalStorage("consent", "denied")
 
         setCookies()
@@ -176,7 +176,7 @@ export default function CookieModal({ data }: { data: Modal }) {
 
         setOpen(false)
         setShowBanner(false)
-    }
+    }, [functional, analytic, advertisement])
 
     return (
         <>

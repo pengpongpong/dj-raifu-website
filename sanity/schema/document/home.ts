@@ -79,6 +79,28 @@ export default defineType({
                     type: "string"
                 })
             ]
+        }),
+        defineField({
+            name: "seo",
+            title: "SEO",
+            type: "object",
+            fields: [
+                defineField({
+                    name: "title",
+                    title: "Website Titel",
+                    type: "string"
+                }),
+                defineField({
+                    name: "description",
+                    title: "Website Beschreibung",
+                    type: "text"
+                }),
+                defineField({
+                    name: "keywords",
+                    title: "Website Keywords",
+                    type: "text"
+                }),
+            ]
         })
     ]
 })

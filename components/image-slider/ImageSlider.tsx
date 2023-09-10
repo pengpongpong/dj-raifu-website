@@ -1,5 +1,5 @@
 "use client"
-import React, { lazy, useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import Image from "next/image";
 
 import Swiper from 'swiper';
@@ -37,12 +37,13 @@ const ImageSlider = ({ imageList }: { imageList: ImageSlider[] }) => {
     }, [])
 
     // create images from imageList and convert sanity url to links
-    const images = imageList?.map(obj => (
-        <Link rel="noreferrer noopener" target="_blank" href={obj.url} className="swiper-slide w-full h-full !flex !justify-center !items-center" key={obj._key}>
-            <Image src={urlForImage(obj.image).url()} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw" priority style={{ objectFit: "contain" }} alt="Image slide" />
-        </Link>
-
-    ))
+    const images = useMemo(() => {
+        return imageList?.map(obj => (
+            <Link rel="noreferrer noopener" target="_blank" href={obj.url} className="swiper-slide w-full h-full !flex !justify-center !items-center" key={obj._key}>
+                <Image src={urlForImage(obj.image).size(2048, 2048).url()} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw" priority style={{ objectFit: "contain" }} alt="Image slide" />
+            </Link>
+        ))
+    }, [imageList])
 
     return (
         <section className="my-12 w-full">

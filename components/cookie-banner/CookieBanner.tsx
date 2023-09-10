@@ -6,7 +6,7 @@ import Link from "next/link"
 
 import { getLocalStorage, setLocalStorage } from "@/utils/utils"
 
-interface CookieBannerProps {
+export interface CookieBannerProps {
     text: string;
     iconText: string;
     acceptButton: string;
@@ -42,7 +42,7 @@ export const ShowCookieModal = ({ text, styles }: { text: string, styles: string
 }
 
 
-const CookieBanner = ({ data, main }: { data: CookieBannerProps, main: boolean }) => {
+const CookieBanner = ({ data, main }: { data: CookieBannerProps, main?: boolean }) => {
     const showBanner = useConsentStore(state => state.showBanner)
 
     // show cookie banner if no cookie consent 

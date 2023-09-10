@@ -8,26 +8,22 @@ import { aboutMeQuery } from "@/sanity/lib/query"
 
 import AboutMe, { AboutMeProps } from "@/components/pages/about-me/AboutMe"
 
-
 // meta tags
 export async function generateMetadata(): Promise<Metadata> {
-    const title = "DJ Raifu | Über mich"
-    const text = "Musik DJ für Afro Beats, Hip-Hop, R&B und mehr. Buche ihn für dein Event"
-    const keywords = ""
     const domain = process.env.NEXT_PUBLIC_DOMAIN
 
-    const data = await cachedClient(aboutMeQuery)
+    const data: AboutMeProps = await cachedClient(aboutMeQuery)
 
     return {
-        title: title,
-        description: text,
-        keywords: keywords,
+        title: data?.seo.title,
+        description: data?.seo.description,
+        keywords: data?.seo.keywords,
         authors: [{ name: 'DJ Raifu' }],
         openGraph: {
-            title: title,
-            description: text,
+            title: data?.seo.title,
+            description: data?.seo.description,
             url: `${domain}/ueber-mich`,
-            siteName: 'DJ Raifu | Über mich',
+            siteName: data?.seo.title,
             images: [
                 {
                     url: urlForImage(data?.image).url(),

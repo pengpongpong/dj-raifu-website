@@ -9,3 +9,32 @@
         2px 2px 4px #c5c5c5,
         -2px -2px 4px #000;
 }
+
+:root {
+    --primary: black;
+    --secondary: rgb(245,190,97);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary) var(--primary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--primary);
+    border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--secondary);
+    border-radius: 14px;
+    border: 3px solid var(--primary);
+}

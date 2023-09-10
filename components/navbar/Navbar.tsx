@@ -23,13 +23,13 @@ const Navbar = ({ navData, main }: { navData: NavbarProps, main?: boolean }) => 
             <Socials styles={socialStyles} />
             <ul className={`${main ? "invisible opacity-0 animate-[showVisibility_2s_2s_ease-in-out_forwards] motion-reduce:visible motion-reduce:animate-none" : ""} mt-2 gap-4 md:gap-6 md:mt-4 lg:gap-8 xl:gap-12 xl:mt-6 3xl:gap-16 tracking-wide md:tracking-wider lg:tracking-widest`}>
                 <li>
-                    <Link className="daisy_btn text-base bg-black text-white font-normal box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" href="/">Home</Link>
+                    <Link className="daisy_btn text-base whitespace-nowrap bg-black text-white font-normal box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" href="/">Home</Link>
                 </li>
                 <li>
-                    <Link className="daisy_btn text-base bg-black text-white font-normal box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" href="/ueber-mich">Über mich</Link>
+                    <Link className="daisy_btn text-base whitespace-nowrap bg-black text-white font-normal box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" href="/ueber-mich">Über mich</Link>
                 </li>
                 <li>
-                    <Link className="daisy_btn text-base bg-black text-white font-normal box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" href="/kontakt">Kontakt</Link>
+                    <Link className="daisy_btn text-base whitespace-nowrap bg-black text-white font-normal box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" href="/kontakt">Kontakt</Link>
                 </li>
             </ul>
         </nav>

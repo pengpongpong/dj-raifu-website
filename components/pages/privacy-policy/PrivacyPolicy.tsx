@@ -1,5 +1,6 @@
 import React from 'react'
 import { ShowCookieModal } from "@/components/cookie-banner/CookieBanner"
+import { Seo } from "@/sanity/lib/query"
 
 export interface PrivacyPolicyProps {
     title: string,
@@ -7,7 +8,8 @@ export interface PrivacyPolicyProps {
     content: {
         title: string,
         textContent: string[]
-    }[]
+    }[],
+    seo: Seo
 }
 
 const PrivacyPolicy = ({ pageData }: { pageData: PrivacyPolicyProps }) => {

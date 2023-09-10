@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useMemo } from 'react'
 import dynamic from "next/dynamic"
 
 const ReactPlayer = dynamic(() => import("react-player/soundcloud"), { ssr: false });
@@ -14,15 +14,18 @@ const Soundcloud = ({ list }: { list: string[] }) => {
         )
     }
 
+    const items = useMemo(() => {
+        return list?.map(item => (
+            <li key={item} >
+                <ReactPlayerContainer url={item} />
+            </li>
+        ))
+    }, [list])
+
     return (
         <section className="mb-8 max-w-[1500px] mx-auto">
             <ul className="flex flex-col md:flex-row justify-center gap-6 md:gap-8 flex-wrap">
-                {list?.map(item => (
-                    <li key={item} >
-                        <ReactPlayerContainer url={item} />
-                    </li>
-                ))}
-
+                {items}
             </ul>
         </section>
     )

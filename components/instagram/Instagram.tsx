@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import React from 'react'
+import React, { useMemo } from 'react'
 import instagramIcon from "public/icons/bxl-instagram.svg"
 import { SanityImage, urlForImage } from "@/sanity/lib/image"
 
@@ -22,14 +22,18 @@ interface InstagramList {
 
 const Instagram = ({ list }: { list: InstagramList[] }) => {
 
+    const items = useMemo(() => {
+        return list?.map(item => (
+            <li key={item._key} className="w-auto h-auto md:w-[400px] p-4 overflow-hidden bg-black border border-white rounded-lg relative box-shadow xl:hover:scale-125 transition-transform duration-300 ease-in-out hover:z-20">
+                <Card image={item} />
+            </li>))
+    }, [list])
+
     return (
         <>
             <section className="mb-8 mt-8 max-w-[1600px] mx-auto flex justify-center items-center">
                 <ul className="flex flex-col md:flex-row gap-6 md:gap-8 lg:max-w-[1300px] justify-center md:flex-wrap">
-                    {list?.map(item => (
-                        <li key={item._key} className="w-auto h-auto md:w-[400px] p-4 overflow-hidden bg-black border border-white rounded-lg relative box-shadow xl:hover:scale-125 transition-transform duration-300 ease-in-out hover:z-20">
-                            <Card image={item} />
-                        </li>))}
+                    {items}
                 </ul>
             </section>
             <hr className="py-4 md:mt-8 md:mx-4 lg:mx-32 lg:mt-12 lg:mb-6 xl:mx-36 3xl:mx-72" />
