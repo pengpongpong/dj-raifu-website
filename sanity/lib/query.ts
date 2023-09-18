@@ -64,3 +64,10 @@ export const cookieQuery = groq`*[_type == "cookie"][0]{
     modalButton,
     modal
     }`
+
+// imprint data
+export const imprintQuery = groq`*[_type == "imprint"][0]{
+    company,
+    owner,
+    data
+    }`

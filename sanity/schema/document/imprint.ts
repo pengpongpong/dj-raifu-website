@@ -7,7 +7,7 @@ export default defineType({
     fields: [
         defineField({
             name: "company",
-            title: "Firma",
+            title: "Firmenname",
             type: "string"
         }),
         defineField({
@@ -21,13 +21,13 @@ export default defineType({
             type: "object",
             fields: [
                 defineField({
-                    name: "uid",
-                    title: "UID-Nr",
+                    name: "phone",
+                    title: "Telefon",
                     type: "string"
                 }),
                 defineField({
-                    name: "owner",
-                    title: "Inhaber",
+                    name: "email",
+                    title: "Email",
                     type: "string"
                 }),
             ]

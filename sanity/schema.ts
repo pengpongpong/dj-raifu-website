@@ -6,6 +6,7 @@ import privacyPolicy from "./schema/document/privacyPolicy"
 import cookie from "./schema/document/cookie"
 import logo from "./schema/document/logo"
 import contact from "./schema/document/contact"
+import imprint from "./schema/document/imprint"
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -14,6 +15,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     privacyPolicy,
     cookie,
     logo,
-    contact
+    contact,
+    imprint
   ],
 }

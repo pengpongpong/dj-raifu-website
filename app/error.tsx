@@ -19,7 +19,7 @@ export default function Error({
 
     return (
         <>
-            <main className="my-24 flex flex-col gap-8 justify-center items-center font-text">
+            <main className="my-24 flex flex-col flex-grow gap-8 justify-center items-center font-text">
                 <h1 className="text-6xl">Oops!</h1>
                 <p>Etwas ging schief...</p>
                 <button
