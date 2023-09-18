@@ -2,17 +2,31 @@
     <url>
         <loc>https://www.djraifu.com</loc>
         <lastmod>2023-09-10T22:13:25Z</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1</priority>
     </url>
     <url>
         <loc>https://www.djraifu.com/ueber-mich</loc>
         <lastmod>2023-09-10T22:16:17Z</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://www.djraifu.com/kontakt</loc>
         <lastmod>2023-09-10T22:20:16Z</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
     </url>
     <url>
         <loc>https://www.djraifu.com/datenschutz</loc>
         <lastmod>2023-09-10T22:44:03Z</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://www.djraifu.com/impressum</loc>
+        <lastmod>2023-09-18T18:00:03Z</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
     </url>
 </urlset>
