@@ -15,6 +15,10 @@ export async function generateMetadata(): Promise<Metadata> {
         description: data?.seo.description,
         keywords: data?.seo.keywords,
         authors: [{ name: 'DJ Raifu' }],
+        metadataBase: new URL(domain as string),
+        alternates: {
+          canonical: "/kontakt"
+        },
         openGraph: {
             title: data?.seo.title,
             description: data?.seo.description,

@@ -10,7 +10,7 @@ export default async function NotFound() {
     return (
         <>
             <Navbar navData={navData} />
-            <main className="my-24 flex flex-col gap-8 justify-center items-center font-text">
+            <main className="py-24 flex flex-col gap-8 justify-center items-center font-text bg-black text-white">
                 <h1 className="text-6xl">Oops!</h1>
                 <p>404 - Seite nicht gefunden!</p>
                 <p>

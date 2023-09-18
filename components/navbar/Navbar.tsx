@@ -16,7 +16,7 @@ const Navbar = ({ navData, main }: { navData: NavbarProps, main?: boolean }) => 
     }
 
     return (
-        <nav className="mt-8 daisy_navbar flex-col justify-between items-center gap-4 font-text">
+        <nav className="pt-8 daisy_navbar flex-col justify-between items-center gap-4 font-text bg-black">
             {navData?.image
                 ? <Image src={urlForImage(navData?.image).url()} className={`${main ? "translate-y-[40vh] scale-150 animate-[slideUp_2s_1s_ease-in-out_forwards]" : ""} w-[150px] md:w-[200px] lg:w-[250px] xl:w-[300px] z-10`} width={2560} height={1440} priority alt="Dj Raifu logo" />
                 : ""}
