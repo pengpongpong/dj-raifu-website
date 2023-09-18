@@ -24,6 +24,9 @@ const Footer = () => {
                     <li>
                         <Link href="/datenschutz" className="daisy_link daisy_link-hover">Datenschutz</Link>
                     </li>
+                    <li>
+                        <Link href="/impressum" className="daisy_link daisy_link-hover">Impressum</Link>
+                    </li>
                 </ul>
             </nav>
             <p>Copyright &copy; {year} - DJ Raifu</p>
