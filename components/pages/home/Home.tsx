@@ -52,11 +52,11 @@ const Home = ({ data }: { data: HomeData }) => {
                 <p className="text-center text-2xl md:text-3xl md:mt-2 lg:text-4xl xl:text-5xl tracking-wide">{data?.subTitle}</p>
             </header>
             <main className="m-4 flex-grow md:mx-12 lg:m-18 xl:mx-80 xl:mb-16 invisible opacity-0 animate-[showVisibility_2s_2.5s_ease-in-out_forwards] motion-reduce:visible motion-reduce:animate-none">
-                <section className="mb-4 mx-auto font-text text-center gap-4 flex flex-col justify-center items-center text-lg md:text-xl lg:w-4/5 3xl:w-2/3">
+                <div className="mb-4 mx-auto font-text text-center gap-4 flex flex-col justify-center items-center text-lg md:text-xl lg:w-4/5 3xl:w-2/3">
                     <p>{data?.content}</p>
                     <p>{data?.contactText}</p>
                     <Link className="daisy_btn w-full my-4 md:my-6 lg:my-8 lg:w-1/2 xl:my-12 tracking-wider box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" href="/kontakt">{data?.contactButton}</Link>
-                </section>
+                </div>
                 <Instagram list={data?.diashow} />
                 <Soundcloud list={data?.soundcloud} />
             </main>

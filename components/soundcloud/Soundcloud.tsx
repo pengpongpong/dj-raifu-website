@@ -23,11 +23,11 @@ const Soundcloud = ({ list }: { list: string[] }) => {
     }, [list])
 
     return (
-        <section className="mb-8 max-w-[1500px] mx-auto">
+        <div className="mb-8 max-w-[1500px] mx-auto">
             <ul className="flex flex-col md:flex-row justify-center gap-6 md:gap-8 flex-wrap">
                 {items}
             </ul>
-        </section>
+        </div>
     )
 }
 

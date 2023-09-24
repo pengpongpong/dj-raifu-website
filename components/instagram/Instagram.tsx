@@ -31,11 +31,11 @@ const Instagram = ({ list }: { list: InstagramList[] }) => {
 
     return (
         <>
-            <section className="mb-8 mt-8 max-w-[1600px] mx-auto flex justify-center items-center">
+            <div className="mb-8 mt-8 max-w-[1600px] mx-auto flex justify-center items-center">
                 <ul className="flex flex-col md:flex-row gap-6 md:gap-8 lg:max-w-[1300px] justify-center md:flex-wrap">
                     {items}
                 </ul>
-            </section>
+            </div>
             <hr className="py-4 md:mt-8 md:mx-4 lg:mx-32 lg:mt-12 lg:mb-6 xl:mx-36 3xl:mx-72" />
         </>
 

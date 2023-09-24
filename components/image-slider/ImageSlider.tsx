@@ -46,7 +46,7 @@ const ImageSlider = ({ imageList }: { imageList: ImageSlider[] }) => {
     }, [imageList])
 
     return (
-        <section className="my-12 w-full">
+        <div className="my-12 w-full">
             <div className="swiper h-[450px] max-w-[450px] md:h-[700px] md:max-w-[700px] lg:h-[900px] lg:max-w-[900px] xl:h-[900px] xl:max-w-[900px]">
                 <div className="swiper-wrapper">
                     {images}
@@ -55,7 +55,7 @@ const ImageSlider = ({ imageList }: { imageList: ImageSlider[] }) => {
                 <div className="swiper-button-prev !text-white opacity-30"></div>
                 <div className="swiper-button-next !text-white opacity-30"></div>
             </div>
-        </section>
+        </div>
     )
 }
 
