@@ -6,7 +6,7 @@ import instagram from "public/icons/bxl-instagram.svg"
 import tiktok from "public/icons/bxl-tiktok.svg"
 import facebook from "public/icons/bxl-facebook.svg"
 import twitter from "public/icons/bxl-twitter.svg"
-import heatwave from "public/icons/heatwave.png"
+import heatwave from "public/icons/heatwave.webp"
 
 const Socials = ({ styles }: { styles: { container: string, icon: string } }) => {
     return (
