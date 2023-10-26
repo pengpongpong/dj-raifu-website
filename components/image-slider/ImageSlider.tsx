@@ -10,9 +10,10 @@ import "swiper/css/bundle";
 import { SanityImage, urlForImage } from "@/sanity/lib/image";
 import Link from "next/link";
 
-interface ImageSlider {
+type ImageSlider = {
     image: SanityImage,
     url: string,
+    diashow: boolean,
     _key: string
 }
 
@@ -32,17 +33,22 @@ const ImageSlider = ({ imageList }: { imageList: ImageSlider[] }) => {
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
-            }
+            },
+            watchOverflow: false
         })
     }, [])
 
     // create images from imageList and convert sanity url to links
     const images = useMemo(() => {
-        return imageList?.map(obj => (
-            <Link rel="noreferrer noopener" target="_blank" href={obj.url} className="swiper-slide w-full h-full !flex !justify-center !items-center" key={obj._key}>
-                <Image src={urlForImage(obj.image).size(2048, 2048).url()} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw" priority style={{ objectFit: "contain" }} alt="Image slide" />
-            </Link>
-        ))
+        return imageList?.map(obj => {
+            if (obj.diashow) {
+                return (
+                    <Link rel="noreferrer noopener" target="_blank" href={obj.url} className="swiper-slide w-full h-full !flex !justify-center !items-center" key={obj._key} >
+                        <Image src={urlForImage(obj.image).size(2048, 2048).url()} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw" priority style={{ objectFit: "contain" }} alt="Image slide" />
+                    </Link >
+                )
+            }
+        })
     }, [imageList])
 
     return (

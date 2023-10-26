@@ -24,9 +24,9 @@ const page = async () => {
                 <p>Inhaber: {pageData?.owner ?? ""}</p>
 
                 <ul className="mt-8">
-                    <li className="mb-2">
+                    {/* <li className="mb-2">
                         Tel: <a href={`tel:${pageData?.data.phone.replace(/\s/g, "") ?? ""}`} rel="noopener noreferrer">{pageData?.data.phone}</a>
-                    </li>
+                    </li> */}
                     <li className="mb-2">
                         E-Mail: <a href={`mailto:${pageData?.data.email ?? ""}`} rel="noopener noreferrer"> {pageData?.data.email}</a>
                     </li>

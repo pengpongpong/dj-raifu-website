@@ -22,6 +22,7 @@ export const homeQuery = groq`*[_type == "home"][0]{
     slug,
     diashow,
     soundcloud,
+    spotify,
     seo
 }`
 

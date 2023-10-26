@@ -7,7 +7,7 @@ const csp = `
     style-src-elem 'self' fonts.googleapis.com data: 'unsafe-inline';
     style-src-attr 'self' 'unsafe-inline' data:;
     font-src 'self' fonts.gstatic.com data: https: data:;
-    frame-src 'self' https://cdn.sanity.io https://w.soundcloud.com https://api-widget.soundcloud.com https://*.sndcdn.com;
+    frame-src 'self' https://cdn.sanity.io https://w.soundcloud.com https://api-widget.soundcloud.com https://open.spotify.com https://*.sndcdn.com;
     frame-ancestors 'self';
 `
 

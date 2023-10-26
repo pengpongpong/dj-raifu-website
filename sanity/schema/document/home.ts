@@ -47,6 +47,11 @@ export default defineType({
                             name: "url",
                             title: "Link",
                             type: "string",
+                        }),
+                        defineField({
+                            name: "diashow",
+                            title: "Zeige in Diashow",
+                            type: "boolean",
                         })
                     ]
                 }),
@@ -76,6 +81,18 @@ export default defineType({
                 defineField({
                     name: "link",
                     title: "Soundcloud Link",
+                    type: "string"
+                })
+            ]
+        }),
+        defineField({
+            name: "spotify",
+            title: "Spotify",
+            type: "array",
+            of: [
+                defineField({
+                    name: "link",
+                    title: "Spotify Link",
                     type: "string"
                 })
             ]

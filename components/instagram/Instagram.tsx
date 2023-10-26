@@ -8,7 +8,7 @@ const Card = ({ image }: { image: InstagramList }) => {
 
     return (
         <Link className="w-full h-full inline-block" key={image._key} href={image.url} rel="noreferrer noopener" target="_blank">
-            <Image src={urlForImage(image.image).url()} alt="instagram image" width={350} height={350} style={{ objectFit: "contain", width: "100%", height: "100%" }} />
+            <Image src={urlForImage(image.image).url()} alt="instagram image" priority width={350} height={350} style={{ objectFit: "contain", width: "100%", height: "100%" }} />
             <Image className="absolute bottom-2 right-2" src={instagramIcon} alt="instagram icon" width={40} height={40} />
         </Link>
     )
@@ -31,14 +31,13 @@ const Instagram = ({ list }: { list: InstagramList[] }) => {
 
     return (
         <>
-            <div className="mb-8 mt-8 max-w-[1600px] mx-auto flex justify-center items-center">
+            <section className="mb-8 mt-8 max-w-[1600px] mx-auto flex justify-center items-center">
                 <ul className="flex flex-col md:flex-row gap-6 md:gap-8 lg:max-w-[1300px] justify-center md:flex-wrap">
                     {items}
                 </ul>
-            </div>
+            </section>
             <hr className="py-4 md:mt-8 md:mx-4 lg:mx-32 lg:mt-12 lg:mb-6 xl:mx-36 3xl:mx-72" />
         </>
-
     )
 }
 

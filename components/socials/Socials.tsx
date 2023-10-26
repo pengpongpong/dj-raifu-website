@@ -6,6 +6,7 @@ import instagram from "public/icons/bxl-instagram.svg"
 import tiktok from "public/icons/bxl-tiktok.svg"
 import facebook from "public/icons/bxl-facebook.svg"
 import twitter from "public/icons/bxl-twitter.svg"
+import heatwave from "public/icons/heatwave.png"
 
 const Socials = ({ styles }: { styles: { container: string, icon: string } }) => {
     return (
@@ -34,6 +35,11 @@ const Socials = ({ styles }: { styles: { container: string, icon: string } }) =>
                 <li>
                     <Link href="https://twitter.com/djraifu" rel="noreferrer noopener">
                         <Image className={styles.icon} src={twitter} alt="twitter icon" />
+                    </Link>
+                </li>
+                <li>
+                    <Link href="https://www.instagram.com/heatwave.association/" rel="noreferrer noopener">
+                        <Image className={styles.icon} style={{width: "1.5rem"}} src={heatwave} alt="twitter icon" />
                     </Link>
                 </li>
             </ul>
