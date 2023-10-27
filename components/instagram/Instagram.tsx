@@ -36,7 +36,7 @@ const Instagram = ({ list }: { list: InstagramList[] }) => {
                     {items}
                 </ul>
             </section>
-            <hr className="py-4 md:mt-8 md:mx-4 lg:mx-32 lg:mt-12 lg:mb-6 xl:mx-36 3xl:mx-72" />
+            <hr className="py-4 md:mt-8 md:mx-4 lg:mx-32 lg:mt-12 lg:mb-6 xl:mx-36 3xl:mx-68" />
         </>
     )
 }
