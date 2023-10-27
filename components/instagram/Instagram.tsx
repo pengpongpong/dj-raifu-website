@@ -24,7 +24,7 @@ const Instagram = ({ list }: { list: InstagramList[] }) => {
 
     const items = useMemo(() => {
         return list?.map(item => (
-            <li key={item._key} className="w-auto h-auto md:w-[400px] p-4 overflow-hidden bg-black border border-white rounded-lg relative box-shadow xl:hover:scale-125 transition-transform duration-300 ease-in-out hover:z-20">
+            <li key={item._key} className="w-auto h-auto md:w-[300px] p-4 overflow-hidden bg-black border border-white rounded-lg relative box-shadow xl:hover:scale-125 transition-transform duration-300 ease-in-out hover:z-20">
                 <Card image={item} />
             </li>))
     }, [list])
