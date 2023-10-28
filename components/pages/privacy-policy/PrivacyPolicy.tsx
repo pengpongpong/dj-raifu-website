@@ -30,7 +30,7 @@ const PrivacyPolicy = ({ pageData }: { pageData: PrivacyPolicyProps }) => {
                         </section>
                     )
                 })}
-                <ShowCookieModal text="Öffne Cookie Einstellung" styles="my-8 lg:w-1/2 lg:mx-auto daisy_btn tracking-wide border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" />
+                <ShowCookieModal text="Öffne Cookie Einstellung" styles="vinyl my-8 lg:w-1/2 lg:mx-auto daisy_btn tracking-wide border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" />
             </main>
         </>
     )

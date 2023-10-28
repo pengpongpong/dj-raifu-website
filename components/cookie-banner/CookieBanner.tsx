@@ -77,8 +77,8 @@ const CookieBanner = ({ data, main }: { data: CookieBannerProps, main?: boolean 
                     <span className="ml-2 text-left">{data?.text}</span>
                 </span>
                 <div className="flex gap-4 justify-center">
-                    <ShowCookieModal text={data?.modalButton} styles="daisy_btn tracking-wide border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" />
-                    <button className="daisy_btn tracking-wide border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" onClick={handleAcceptAll}>{data?.acceptButton}</button>
+                    <ShowCookieModal text={data?.modalButton} styles="vinyl daisy_btn tracking-wide border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" />
+                    <button className="vinyl daisy_btn tracking-wide border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" onClick={handleAcceptAll}>{data?.acceptButton}</button>
                 </div>
             </div > : ""}
         </>

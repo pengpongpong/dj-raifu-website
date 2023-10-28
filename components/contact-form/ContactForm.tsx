@@ -133,7 +133,7 @@ const ContactForm = ({ pageData }: { pageData: ContactProps }) => {
                 <textarea className="daisy_textarea daisy_textarea-bordered daisy_textarea-primary text-base" rows={6} placeholder={pageData?.message} {...register("message")} />
             </fieldset>
 
-            <button className="w-full my-12 daisy_btn bg-black text-white box-shadow tracking-wider hover:bg-white hover:text-black transition duration-300 ease-in-out" type="submit">{pageData?.button}</button>
+            <button className="vinyl w-full my-12 daisy_btn bg-black text-white box-shadow tracking-wider hover:bg-white hover:text-black transition duration-300 ease-in-out" type="submit">{pageData?.button}</button>
             {message !== "" ? <p className="text-center mb-4 tracking-wide font-text">{message}</p> : ""}
         </form>
     )

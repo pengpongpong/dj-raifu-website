@@ -230,15 +230,15 @@ export default function CookieModal({ data }: { data: Modal }) {
                         </form>
                     </DialogContent>
                     <div className="p-4 flex flex-col lg:flex-row-reverse gap-4">
-                        <button className="group daisy_btn border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" onClick={handleAcceptAll}>
+                        <button className="vinyl group daisy_btn border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" onClick={handleAcceptAll}>
                             {data?.acceptButton}
                             <CookieIcon />
                         </button>
-                        <button className=" group daisy_btn border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" onClick={handleAcceptSettings}>
+                        <button className="vinyl group daisy_btn border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" onClick={handleAcceptSettings}>
                             {data?.userSettingsButton}
                             <CookieIcon />
                         </button>
-                        <button className=" group daisy_btn border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" onClick={handleDeny}>
+                        <button className="vinyl group daisy_btn border-black text-white box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" onClick={handleDeny}>
                             {data?.denyButton}
                             <CookieIcon />
                         </button>

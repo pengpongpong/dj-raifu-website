@@ -23,6 +23,9 @@
     scrollbar-color: var(--secondary) var(--primary);
 }
 
+.vinyl:hover {
+    cursor: url("/icons/vinyl.png"), auto;
+}
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
