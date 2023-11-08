@@ -13,32 +13,32 @@ const Socials = ({ styles }: { styles: { container: string, icon: string } }) =>
         <nav>
             <ul className={styles.container}>
                 <li>
-                    <Link href="https://soundcloud.com/djraifu" rel="noreferrer noopener">
+                    <Link aria-label="visit Soundcloud profile" href="https://soundcloud.com/djraifu" rel="noreferrer noopener">
                         <Image className={styles.icon} src={soundcloud} alt="soundcloud icon" />
                     </Link>
                 </li>
                 <li>
-                    <Link href="https://www.instagram.com/dj.raifu/" rel="noreferrer noopener">
+                    <Link aria-label="visit Instagram DJ Raifu profile" href="https://www.instagram.com/dj.raifu/" rel="noreferrer noopener">
                         <Image className={styles.icon} src={instagram} alt="instagram icon" />
                     </Link>
                 </li>
                 <li>
-                    <Link href="https://www.tiktok.com/@dj.raifu?_t=8eGTzTctYiZ&_r=1" rel="noreferrer noopener">
+                    <Link aria-label="visit TikTok profile" href="https://www.tiktok.com/@dj.raifu?_t=8eGTzTctYiZ&_r=1" rel="noreferrer noopener">
                         <Image className={styles.icon} src={tiktok} alt="tiktok icon" />
                     </Link>
                 </li>
                 <li>
-                    <Link href="https://www.facebook.com/raifu.absenger" rel="noreferrer noopener">
+                    <Link aria-label="visit Facebook profile" href="https://www.facebook.com/raifu.absenger" rel="noreferrer noopener">
                         <Image className={styles.icon} src={facebook} alt="facebook icon" />
                     </Link>
                 </li>
                 <li>
-                    <Link href="https://twitter.com/djraifu" rel="noreferrer noopener">
+                    <Link aria-label="visit Twitter profile" href="https://twitter.com/djraifu" rel="noreferrer noopener">
                         <Image className={styles.icon} src={twitter} alt="twitter icon" />
                     </Link>
                 </li>
                 <li>
-                    <Link href="https://www.instagram.com/heatwave.association/" rel="noreferrer noopener">
+                    <Link aria-label="visit Instagram Heatwave profile" href="https://www.instagram.com/heatwave.association/" rel="noreferrer noopener">
                         <Image className={styles.icon} style={{width: "1.5rem"}} src={heatwave} alt="twitter icon" />
                     </Link>
                 </li>

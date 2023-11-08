@@ -91,6 +91,7 @@ const ContactForm = ({ pageData }: { pageData: ContactProps }) => {
     return (
         <form onSubmit={onSubmit} className="md:mx-16 lg:mx-36 xl:max-w-[800px] xl:mx-auto">
             <fieldset className="font-text flex flex-col gap-4">
+                <label htmlFor="name">Name</label>
                 <input type="text" placeholder={pageData?.name} className="daisy_input daisy_input-bordered daisy_input-primary w-full border border-white text-white" {...register("name")} />
                 {errors?.name && <ErrorText text={errors?.name?.message} />}
 
@@ -99,6 +100,7 @@ const ContactForm = ({ pageData }: { pageData: ContactProps }) => {
                     name="select"
                     render={({ field: { onChange } }) => (
                         <>
+                            <label htmlFor="select">Wie möchtest du kontaktiert werden?</label>
                             <select name="type" className="daisy_select daisy_select-bordered daisy_select-primary w-full" onChange={onChange} defaultValue="Wie möchtest du kontaktiert werden?">
                                 <option disabled>{pageData?.contactForm}</option>
                                 <option value="email">Email</option>
@@ -120,6 +122,7 @@ const ContactForm = ({ pageData }: { pageData: ContactProps }) => {
                     name="date"
                     render={({ field: { onChange, value } }) => (
                         <>
+                            <label htmlFor="date">Wähle das Event Datum aus</label>
                             <DatePickerForm
                                 selected={value}
                                 setSelected={(date) => onChange(date)}
@@ -129,7 +132,7 @@ const ContactForm = ({ pageData }: { pageData: ContactProps }) => {
                         </>
                     )}
                 />
-
+                <label htmlFor="message">Hinterlasse mir eine Nachricht</label>
                 <textarea className="daisy_textarea daisy_textarea-bordered daisy_textarea-primary text-base" rows={6} placeholder={pageData?.message} {...register("message")} />
             </fieldset>
 

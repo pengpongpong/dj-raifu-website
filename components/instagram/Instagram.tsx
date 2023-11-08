@@ -8,7 +8,7 @@ const Card = ({ image }: { image: InstagramList }) => {
 
     return (
         <Link className="w-full h-full inline-block" key={image._key} href={image.url} rel="noreferrer noopener" target="_blank">
-            <Image src={urlForImage(image.image).url()} alt="instagram image" priority width={350} height={350} style={{ objectFit: "contain", width: "100%", height: "100%" }} />
+            <Image src={urlForImage(image.image).url()} alt={image.alt} priority width={350} height={350} style={{ objectFit: "contain", width: "100%", height: "100%" }} />
             <Image className="absolute bottom-2 right-2" src={instagramIcon} alt="instagram icon" width={40} height={40} />
         </Link>
     )
@@ -17,7 +17,8 @@ const Card = ({ image }: { image: InstagramList }) => {
 interface InstagramList {
     url: string,
     image: SanityImage,
-    _key: string
+    _key: string,
+    alt: string
 }
 
 const Instagram = ({ list }: { list: InstagramList[] }) => {

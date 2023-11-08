@@ -20,7 +20,8 @@ export interface HomeData {
         image: SanityImage,
         url: string,
         _key: string,
-        diashow: boolean
+        diashow: boolean,
+        alt: string
     }[],
     soundcloud: string[],
     spotify: string[],
@@ -59,7 +60,10 @@ const Home = ({ data }: { data: HomeData }) => {
                 <div className="mb-4 mx-auto font-text text-center gap-4 flex flex-col justify-center items-center text-lg md:text-xl lg:w-4/5 3xl:w-2/3">
                     <p>{data?.content}</p>
                     <p>{data?.contactText}</p>
-                    <Link className="vinyl daisy_btn w-full my-4 md:my-6 lg:my-8 lg:w-1/2 xl:my-12 tracking-wider box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out" href="/kontakt">{data?.contactButton}</Link>
+                    <Link
+                     className="vinyl daisy_btn w-full my-4 md:my-6 lg:my-8 lg:w-1/2 xl:my-12 tracking-wider box-shadow hover:bg-white hover:text-black transition duration-300 ease-in-out"
+                     aria-label="gehe zur Kontakt Seite"
+                      href="/kontakt">{data?.contactButton}</Link>
                 </div>
 
                 {!!data?.diashow && <Instagram list={data?.diashow} />}

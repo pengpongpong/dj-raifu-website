@@ -49,6 +49,11 @@ export default defineType({
                             type: "string",
                         }),
                         defineField({
+                            name: "alt",
+                            title: "Alternativ Text",
+                            type: "string",
+                        }),
+                        defineField({
                             name: "diashow",
                             title: "Zeige in Diashow",
                             type: "boolean",

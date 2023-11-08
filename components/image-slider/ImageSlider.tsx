@@ -14,7 +14,8 @@ type ImageSlider = {
     image: SanityImage,
     url: string,
     diashow: boolean,
-    _key: string
+    _key: string,
+    alt: string
 }
 
 const ImageSlider = ({ imageList }: { imageList: ImageSlider[] }) => {
@@ -44,7 +45,7 @@ const ImageSlider = ({ imageList }: { imageList: ImageSlider[] }) => {
             if (obj.diashow) {
                 return (
                     <Link rel="noreferrer noopener" target="_blank" href={obj.url} className="swiper-slide w-full h-full !flex !justify-center !items-center" key={obj._key} >
-                        <Image src={urlForImage(obj.image).size(2048, 2048).url()} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw" priority style={{ objectFit: "contain" }} alt="Image slide" />
+                        <Image src={urlForImage(obj.image).size(2048, 2048).url()} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw" priority style={{ objectFit: "contain" }} alt={obj.alt} />
                     </Link >
                 )
             }
