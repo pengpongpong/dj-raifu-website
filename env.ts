@@ -14,3 +14,13 @@ export const projectId = assertValue(
 )
 
 export const useCdn = true
+
+export const sesUrl = assertValue(
+  process.env.NEXT_PUBLIC_SES_URL_AWS,
+  'Missing environment variable: NEXT_PUBLIC_SES_URL_AWS'
+)
+
+export const sesKey = assertValue(
+  process.env.NEXT_PUBLIC_SES_KEY_AWS,
+  'Missing environment variable: NEXT_PUBLIC_SES_KEY_AWS'
+)

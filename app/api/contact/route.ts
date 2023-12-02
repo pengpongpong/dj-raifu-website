@@ -1,3 +1,4 @@
+import { sesKey, sesUrl } from "@/env";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {
@@ -11,9 +12,6 @@ export const POST = async (req: NextRequest) => {
             message?: string,
         }, date: Date
     } = bodyData
-
-    const sesKey = process.env.SES_KEY_AWS
-    const sesUrl = process.env.SES_URL_AWS
 
     // check for data and date
     if (!date && !data) return NextResponse.json({ message: "Required fields missing" }, { status: 400 })
