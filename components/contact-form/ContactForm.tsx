@@ -8,6 +8,7 @@ import * as yup from "yup"
 import { DatePickerForm } from "./DatePicker"
 
 import { ContactProps } from "../pages/contact/Contact"
+import BeatLoader from "react-spinners/BeatLoader";
 
 const ErrorText = ({ text }: { text?: string }) => {
     return <p className="mb-2 font-text text-error text-center">{text}</p>
@@ -18,6 +19,7 @@ const phoneRegex = /(?:\+?\d{1,3}\s?)?(?:(?:\(\d{1,}\)|\d{1,})[-.\s]?\d{1,}[-.\s
 
 const ContactForm = ({ pageData }: { pageData: ContactProps }) => {
     const [message, setMessage] = useState<string>("")
+    const [loading, setLoading] = useState(false)
 
     // error messages
     const errorMessage = {
@@ -71,6 +73,8 @@ const ContactForm = ({ pageData }: { pageData: ContactProps }) => {
 
     // submit data
     const onSubmit = handleSubmit((data) => {
+        setLoading(true)
+
         const body = {
             data: data,
             date: new Intl.DateTimeFormat("de-AT", { dateStyle: "full" }).format(data.date),
@@ -87,15 +91,19 @@ const ContactForm = ({ pageData }: { pageData: ContactProps }) => {
                 // handle error
                 if (message === "Required fields missing") {
                     setMessage("Erforderliche Felder fehlen!")
+                    setLoading(false)
                 } else if (message === "Invalid email") {
                     setMessage("Ungültige Email!")
+                    setLoading(false)
                 } else if (message === "error") {
                     setMessage("Server Fehler! Bitte später erneut versuchen.")
+                    setLoading(false)
 
                 // handle success
                 } else if (message === "success") {
                     reset()
                     setMessage("Nachricht versendet!")
+                    setLoading(false)
                 }
             })
     })
@@ -149,6 +157,7 @@ const ContactForm = ({ pageData }: { pageData: ContactProps }) => {
             </fieldset>
 
             <button className="vinyl w-full my-12 daisy_btn bg-black text-white box-shadow tracking-wider hover:bg-white hover:text-black transition duration-300 ease-in-out" type="submit">{pageData?.button}</button>
+            {loading ? <BeatLoader color="white" className="text-center"/> : ""}
             {message !== "" ? <p className="text-center mb-4 tracking-wide font-text">{message}</p> : ""}
         </form>
     )
