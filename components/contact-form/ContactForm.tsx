@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { Controller, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -53,7 +53,7 @@ const ContactForm = ({ pageData }: { pageData: ContactProps }) => {
         reset,
         control,
         watch,
-        formState: { errors, isSubmitSuccessful }
+        formState: { errors }
     } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
@@ -76,17 +76,29 @@ const ContactForm = ({ pageData }: { pageData: ContactProps }) => {
             date: new Intl.DateTimeFormat("de-AT", { dateStyle: "full" }).format(data.date),
         }
 
-        fetch("/api/contact", { method: "POST", body: JSON.stringify(body) })
+        fetch("/api/contact", {
+            method: "POST",
+            body: JSON.stringify(body),
+        })
             .then(res => res.json())
             .then(result => {
-                setMessage(result.message)
+                const { message } = result
+
+                // handle error
+                if (message === "Required fields missing") {
+                    setMessage("Erforderliche Felder fehlen!")
+                } else if (message === "Invalid email") {
+                    setMessage("Ungültige Email!")
+                } else if (message === "error") {
+                    setMessage("Server Fehler! Bitte später erneut versuchen.")
+
+                // handle success
+                } else if (message === "success") {
+                    reset()
+                    setMessage("Nachricht versendet!")
+                }
             })
     })
-
-    // reset form on success submit
-    useEffect(() => {
-        if (isSubmitSuccessful) reset()
-    }, [isSubmitSuccessful, reset])
 
     return (
         <form onSubmit={onSubmit} className="md:mx-16 lg:mx-36 xl:max-w-[800px] xl:mx-auto">

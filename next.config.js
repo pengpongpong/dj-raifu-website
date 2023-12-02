@@ -2,6 +2,7 @@
 const csp = `
     base-uri 'self';
     child-src 'self';
+    script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://w.soundcloud.com https://w.soundcloud.com/player/api.js;
     img-src 'self' https://cdn.sanity.io data: https://*.sndcdn.com;
     style-src 'self' fonts.googleapis.com https: 'unsafe-inline' data:;
     style-src-elem 'self' fonts.googleapis.com data: 'unsafe-inline';
@@ -43,7 +44,7 @@ const nextConfig = {
                     },
                     {
                         key: 'Content-Security-Policy',
-                        value: csp.replace(/\s{2,}/g, ' ').trim()
+                        value: process.env.NODE_ENV === "development" ? "" : csp.replace(/\s{2,}/g, ' ').trim()
                     },
                     {
                         key: 'X-Content-Type-Options',

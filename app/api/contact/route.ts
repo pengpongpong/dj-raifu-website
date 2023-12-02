@@ -1,71 +1,40 @@
-import { awsAccessKey, awsSecretKey, publicEmail } from "@/env";
 import { NextRequest, NextResponse } from "next/server";
 
-const aws = require("@aws-sdk/client-ses")
-const nodemailer = require("nodemailer");
-
-// get AWS SES provider
-const ses = new aws.SES({
-    apiVersion: "2010-12-01",
-    region: "eu-central-1",
-    credentials: {
-        accessKeyId: awsAccessKey,
-        secretAccessKey: awsSecretKey
-    }
-});
-
-// create Nodemailer SES transporter
-const transporter = nodemailer.createTransport({
-    SES: { ses, aws },
-});
+const sesKey = process.env.SES_KEY_AWS
+const sesUrl = process.env.SES_URL_AWS
 
 export const POST = async (req: NextRequest) => {
     const bodyData = await req.json()
-    const { data, date }: { data: any, date: any } = bodyData
+    const { data, date }: {
+        data: {
+            name: string,
+            select: string,
+            email?: string,
+            call?: string,
+            message?: string,
+        }, date: Date
+    } = bodyData
 
-    // check if right email/phone number format
-    if (!date && !data) return NextResponse.json({ message: "Ungültige Daten" }, { status: 400 })
+    // check for data and date
+    if (!date && !data) return NextResponse.json({ message: "Required fields missing" }, { status: 400 })
 
-    // mail template to send
-    const mailHtml = `
-    <!DOCTYPE htmlPUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html xmlns="http://www.w3.org/1999/xhtml" lang="de">
-        <head>
-            <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        </head>
-        <body>
-            <h1>Kontaktanfrage</h1>
+    if (!sesKey || !sesUrl) return NextResponse.json({ message: "error" }, { status: 400 })
 
-            <p>Name: ${data.name}</p>
-            <p>Kontaktform: ${data.select === "email" ? "Email" : "Anruf"}</p>
-            <p>Email: ${!data.email ? "-" : data.email}</p>
-            <p>Tel.: ${!data.call ? "-" : data.call}</p>
-            <p>Event Datum: ${date}</p>
-            <p>Nachricht: ${data?.message}</p>
-        </body>
-    </html>
-    `
+    let responseMessage;
 
-    // mail header
-    const mailData = {
-        from: "no-reply@djraifu.com",
-        to: publicEmail,
-        subject: `Kontaktanfrage | ${data.name}`,
-        html: mailHtml,
-    }
+    await fetch(sesUrl, {
+        method: "POST",
+        body: JSON.stringify({ data, date }),
+        headers: {
+            "x-api-key": sesKey
+        }
+    })
+        .then(res => res.json())
+        .then(result => {
+            const { message } = JSON.parse(result.body)
 
-    // send mail to subscriber
-    await new Promise((resolve, reject) => {
-        transporter.sendMail(mailData, (err: any, info: any) => {
-            if (err) {
-                reject(err);
-                return NextResponse.json({ message: "Konnte Email nicht senden. Bitte wiederholen!", error: err }, { status: 500 })
-            } else {
-                resolve(info);
-            }
-        });
-    });
+            responseMessage = message;
+        })
 
-    return NextResponse.json({ message: "Erfolgreich übermittelt!" }, { status: 201 })
+    return NextResponse.json({ message: responseMessage }, { status: 200 })
 }

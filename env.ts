@@ -14,18 +14,3 @@ export const projectId = assertValue(
 )
 
 export const useCdn = true
-
-export const awsAccessKey = assertValue(
-  process.env.NEXT_PUBLIC_AWS_ACCESS_KEY,
-  'Missing environment variable: NEXT_PUBLIC_AWS_ACCESS_KEY'
-)
-
-export const awsSecretKey = assertValue(
-  process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY,
-  'Missing environment variable: AWS_SECRET_ACCESS_KEY'
-)
-
-export const publicEmail = assertValue(
-  process.env.NEXT_PUBLIC_EMAIL_TO,
-  'Missing environment variable: NEXT_PUBLIC_EMAIL_TO'
-)
