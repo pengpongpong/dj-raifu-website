@@ -18,9 +18,7 @@ export const POST = async (req: NextRequest) => {
 
     if (!sesKey || !sesUrl) return NextResponse.json({ message: "error" }, { status: 400 })
 
-    let responseMessage;
-
-    await fetch(sesUrl, {
+    const responseMessage = await fetch(sesUrl, {
         method: "POST",
         body: JSON.stringify({ data, date }),
         headers: {
@@ -31,7 +29,7 @@ export const POST = async (req: NextRequest) => {
         .then(result => {
             const { message } = JSON.parse(result.body)
 
-            responseMessage = message;
+            return message;
         })
 
     return NextResponse.json({ message: responseMessage }, { status: 200 })

@@ -39,3 +39,7 @@ next-env.d.ts
 
 # to-do
 /__todo__
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
