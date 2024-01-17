@@ -59,8 +59,8 @@ const ImageSlider = ({ imageList }: { imageList: ImageSlider[] }) => {
                     {images}
                 </div>
 
-                <div className="swiper-button-prev !text-white opacity-30"></div>
-                <div className="swiper-button-next !text-white opacity-30"></div>
+                <div className="swiper-button-prev !text-white opacity-30 hidden md:block"></div>
+                <div className="swiper-button-next !text-white opacity-30 hidden md:block"></div>
             </div>
         </div>
     )
