@@ -1,5 +1,5 @@
 "use client"
-import { Dispatch, SetStateAction, lazy } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 import { format } from 'date-fns';
 import { de } from 'date-fns/locale';
